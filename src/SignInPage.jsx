@@ -39,10 +39,10 @@ export default function SignIn () {
                             // checked={unknown === true }
                             />
                         </label>
-                        <label>Intructor
+                        <label>Instructor
                             <input
                             type='checkbox'
-                            name='intructor'
+                            name='instructor'
                             // onChange={onChange}
                             // checked={unknown === true }
                             />
