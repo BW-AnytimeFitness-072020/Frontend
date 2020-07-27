@@ -8,7 +8,21 @@ import SignIn from './SignInPage.jsx'
 function App() {
   return (
     <div className="App">
-     <SignIn />
+      <header>
+        <h1>ANYWHERE FITNESS</h1>
+        <button>
+          <Link to='/'>Home</Link>
+        </button>
+        <button>
+          <Link to='/signin'>Sign In</Link>
+        </button>
+      </header>
+      <Switch>
+        <Route exact path='/signin'>
+          <SignIn />
+        </Route>
+      </Switch>
+     
     </div>
   );
 }

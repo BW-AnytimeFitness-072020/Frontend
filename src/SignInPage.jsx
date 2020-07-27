@@ -5,13 +5,13 @@ export default function SignIn () {
     return (
         <form>
         <div className='container'>
-            <heading>
+            {/* <heading>
                 <h1>ANYWHERE FITNESS</h1>
                 <button className='homebutton'>HOME</button>
-            </heading>
+            </heading> */}
             <div className='heading'>
-                <h3>WELCOME!</h3>
-                <h2>Please Sign In or Register</h2>
+                <h2>WELCOME!</h2>
+                <h3>Please Sign In or Register</h3>
                 <div className='inputs'>
                     <label>
                         <input
