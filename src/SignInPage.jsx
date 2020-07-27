@@ -1,56 +1,67 @@
 import React from 'react';
 
-export default function SignIn () { 
+export default function SignIn (props) { 
+    const {inputChange, disabled, errors, signIn, checkChange, submit} = props
+
+    const onSubmit = e => {
+        e.preventDefault()
+        submit()
+    }
+
+    const onInputChange = e => {
+        const {name, value} = e.target
+        inputChange(name, value)
+    }
+
+    const onCheckChange = e => {
+        const {name, checked} = e.target
+        checkChange(name, checked)
+    }
 
     return (
-        <form>
+        <form onSubmit={onSubmit}>
         <div className='container'>
-            {/* <heading>
-                <h1>ANYWHERE FITNESS</h1>
-                <button className='homebutton'>HOME</button>
-            </heading> */}
-            <div className='heading'>
-                <h2>WELCOME!</h2>
-                <h3>Please Sign In or Register</h3>
-                <div className='inputs'>
-                    <label>
+            <h2>WELCOME!</h2>
+            <h3>Please Sign In or Register</h3>
+            <div className='inputs'>
+                <label>
+                    <input
+                    placeholder='UserName'
+                    onChange={onInputChange}
+                    name='name'
+                    type='text'
+                    />
+                </label>
+                <label>
+                    <input
+                    placeholder='Password'
+                    onChange={onInputChange}
+                    name='password'
+                    type='text'
+                    />
+                </label>
+                <div className='checkboxes'>
+                    <h4>Tell us if you are a client or Instructor</h4>
+                    <label>Client
                         <input
-                        placeholder='UserName'
-                        // onChange={onChange}
-                        name='name'
-                        type='text'
+                        type='checkbox'
+                        name='client'
+                        onChange={onCheckChange}
+                        checked={signIn.user.client === true }
                         />
                     </label>
-                    <label>
+                    <label>Instructor
                         <input
-                        placeholder='Password'
-                        // onChange={onChange}
-                        name='password'
-                        type='text'
+                        type='checkbox'
+                        name='instructor'
+                        onChange={onCheckChange}
+                        checked={signIn.user.instructor === true }
                         />
                     </label>
-                    <div className='checkboxes'>
-                        <h4>Tell us if you are a client or Instructor</h4>
-                        <label>Client
-                            <input
-                            type='checkbox'
-                            name='client'
-                            // onChange={onChange}
-                            // checked={unknown === true }
-                            />
-                        </label>
-                        <label>Instructor
-                            <input
-                            type='checkbox'
-                            name='instructor'
-                            // onChange={onChange}
-                            // checked={unknown === true }
-                            />
-                        </label>
-                    </div>
-                    <button className='signInButton'>Sign In</button>
-                    <button className='registerButton'>Register</button>
-                </div>
+                </div> 
+                <button className='signInButton' disabled = {disabled}>Sign In</button>
+                <button className='registerButton' disabled = {disabled}>Register</button>
+                <div>{errors.name}</div>
             </div>
         </div>
     </form>
