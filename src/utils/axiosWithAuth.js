@@ -1,4 +1,5 @@
 import axios from "axios";
+import apiHook from "./apiHook"
 
 export const axiosWithAuth = () => {
   const token = localStorage.getItem("token");
@@ -7,6 +8,6 @@ export const axiosWithAuth = () => {
     headers: {
       Authorization: token
     },
-    baseURL: "api url"
+    baseURL: apiHook()
   });
 };
