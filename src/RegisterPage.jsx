@@ -4,31 +4,30 @@ import FormSchema from './FormSchema.js';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-
 const initialRegistration = {
     username: '',
     email:'',
     password: '',
     user: {
-      client: false,
-      instructor: false,
+        client: false,
+        instructor: false,
     },
-  }
+}
 
-  const initialErrors = {
+const initialErrors = {
     username: '',
     email: '',
     password: '',
-  }
-  
-  const initialDisabled = true
+}
+
+const initialDisabled = true
 
 export default function Register () { 
     const [registration, setRegistration] = useState(initialRegistration)
     const [disabled, setDisabled] = useState(initialDisabled)
     const [errors, setErrors] = useState(initialErrors)
-    const history = useHistory()
     
+    const history = useHistory()
     const inputChange = (name, value) => {
         yup
           .reach(FormSchema, name)
