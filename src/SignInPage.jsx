@@ -1,32 +1,34 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import FormSchema from './FormSchema.js';
 import * as yup from 'yup';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from './contexts/userContext'
 
-const history = useHistory()
 
 const initialSignIn = {
     username: '',
     password: '',
     user: {
-      client: false,
-      instructor: false,
+        client: false,
+        instructor: false,
     },
-  }
+}
 
-  const initialErrors = {
+const initialErrors = {
     username: '',
     password: '',
-  }
-  
-  const initialDisabled = true
+}
+
+const initialDisabled = true
 
 export default function SignIn () { 
-   
+    const { setUserData } = useContext(UserContext)
     const [signIn, setSignIn] = useState(initialSignIn)
     const [disabled, setDisabled] = useState(initialDisabled)
-  const [errors, setErrors] = useState(initialErrors)
+    const [errors, setErrors] = useState(initialErrors)
+    
+    const history = useHistory()
 
     const inputChange = (name, value) => {
         yup
@@ -58,7 +60,6 @@ export default function SignIn () {
         .then(response => {
           console.log(response)
           localStorage.setItem("token", response.data.payload)
-          setSignIn(initialSignIn)
           history.push("/dashboard")
         })
         .catch(error => {
