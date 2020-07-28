@@ -1,7 +1,76 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import * as yup from 'yup';
+import FormSchema from './FormSchema.js';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
-export default function Register (props) { 
-    const {inputChange, disabled, errors, signIn, checkChange, submit} = props
+const history = useHistory()
+const initialRegistration = {
+    username: '',
+    email:'',
+    password: '',
+    user: {
+      client: false,
+      instructor: false,
+    },
+  }
+
+  const initialErrors = {
+    username: '',
+    email: '',
+    password: '',
+  }
+  
+  const initialDisabled = true
+
+export default function Register () { 
+    const [registration, setRegistration] = useState(initialRegistration)
+    const [disabled, setDisabled] = useState(initialDisabled)
+    const [errors, setErrors] = useState(initialErrors)
+
+    const inputChange = (name, value) => {
+        yup
+          .reach(FormSchema, name)
+          .validate(value)
+          .then(valid => {
+            setErrors({
+              ...errors, [name]: '',
+            })
+          })
+          .catch(error => {
+            setErrors({
+              ...errors, [name]: error.errors[0],
+            })
+          })
+          setRegistration({...registration, [name]: value})
+      }
+    
+      const checkChange = (name, isChecked) => {
+        setRegistration({
+          ...registration, users: {
+            ...registration.users, [name]: isChecked,
+          }
+        })
+      }
+    
+      const submit = () => {
+        axios.post('https://reqres.in/api/users/signIn', registration)
+        .then(response => {
+          console.log(response)
+          localStorage.setItem("token", response.data.payload)
+          setRegistration(initialRegistration)
+          history.push("/dashboard")
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+    
+      useEffect(() => {
+        FormSchema.isValid(registration).then(valid => {
+          setDisabled(!valid)
+        }, [registration])
+      })
 
     const onSubmit = e => {
         e.preventDefault()
@@ -55,7 +124,7 @@ export default function Register (props) {
                         type='checkbox'
                         name='client'
                         onChange={onCheckChange}
-                        checked={signIn.user.client === true }
+                        checked={registration.user.client === true }
                         />
                     </label>
                     <label>Instructor
@@ -63,7 +132,7 @@ export default function Register (props) {
                         type='checkbox'
                         name='instructor'
                         onChange={onCheckChange}
-                        checked={signIn.user.instructor === true }
+                        checked={registration.user.instructor === true }
                         />
                     </label>
                 </div> 

@@ -1,7 +1,76 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import FormSchema from './FormSchema.js';
+import * as yup from 'yup';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
-export default function SignIn (props) { 
-    const {inputChange, disabled, errors, signIn, checkChange, submit} = props
+const history = useHistory()
+
+const initialSignIn = {
+    username: '',
+    password: '',
+    user: {
+      client: false,
+      instructor: false,
+    },
+  }
+
+  const initialErrors = {
+    username: '',
+    password: '',
+  }
+  
+  const initialDisabled = true
+
+export default function SignIn () { 
+   
+    const [signIn, setSignIn] = useState(initialSignIn)
+    const [disabled, setDisabled] = useState(initialDisabled)
+  const [errors, setErrors] = useState(initialErrors)
+
+    const inputChange = (name, value) => {
+        yup
+          .reach(FormSchema, name)
+          .validate(value)
+          .then(valid => {
+            setErrors({
+              ...errors, [name]: '',
+            })
+          })
+          .catch(error => {
+            setErrors({
+              ...errors, [name]: error.errors[0],
+            })
+          })
+          setSignIn({...signIn, [name]: value})
+      }
+    
+      const checkChange = (name, isChecked) => {
+        setSignIn({
+          ...signIn, users: {
+            ...signIn.users, [name]: isChecked,
+          }
+        })
+      }
+    
+      const submit = () => {
+        axios.post('https://reqres.in/api/users/signIn', signIn)
+        .then(response => {
+          console.log(response)
+          localStorage.setItem("token", response.data.payload)
+          setSignIn(initialSignIn)
+          history.push("/dashboard")
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }
+    
+      useEffect(() => {
+        FormSchema.isValid(signIn).then(valid => {
+          setDisabled(!valid)
+        }, [signIn])
+      })
 
     const onSubmit = e => {
         e.preventDefault()
