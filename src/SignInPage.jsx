@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-const history = useHistory()
+
 
 const initialSignIn = {
     username: '',
@@ -23,7 +23,7 @@ const initialSignIn = {
   const initialDisabled = true
 
 export default function SignIn () { 
-   
+   const history = useHistory()
     const [signIn, setSignIn] = useState(initialSignIn)
     const [disabled, setDisabled] = useState(initialDisabled)
   const [errors, setErrors] = useState(initialErrors)
