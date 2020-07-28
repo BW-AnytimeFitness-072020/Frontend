@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link, Switch, Route } from 'react-router-dom'
 import Home from './components/Home'
 import Container from 'react-bootstrap/Container'
@@ -7,13 +7,27 @@ import Col from 'react-bootstrap/Col'
 import Classes from './components/Classes'
 import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
-
+import Header from './header.jsx';
+import { UserContext } from './contexts/userContext';
 import './App.css'
 
+
+
+
+const initialUserData = {
+
+}
+
+
 function App() {
-  
+  const [ userData, setUserData] = useState(initialUserData)
+  {/*^This state will allow us to grab data stored in the client/instructor anywhere we want*/}
 
   return (
+    <UserContext.Provider value={ userData }>
+          {/* Put Client Page and Route inside */}
+        
+        
     <Container fluid={true}>
     <Row>
     <Col>
@@ -39,12 +53,14 @@ function App() {
         <Route path='/register'>
           <Register />
         </Route>
+        
         <Route path='/classes'>
           <Classes />
         </Route>
         <Route path='/about'>
           {/* <About /> */}
         </Route>
+        
         <Route path='/'>
         <Home />
         </Route>
@@ -52,7 +68,9 @@ function App() {
       </Col>
       </Row>
     </Container>
+    </UserContext.Provider>
   )
 }
 
 export default App
+

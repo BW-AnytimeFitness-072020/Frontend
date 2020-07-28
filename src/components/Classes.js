@@ -8,6 +8,7 @@ function Classes() {
 
     return (
         <Container>
+        <h1>Classes</h1>
             <AddClass />
         </Container>
     )
