@@ -23,7 +23,7 @@ const initialErrors = {
 const initialDisabled = true
 
 export default function SignIn () { 
-    const { setUserData } = useContext(UserContext)
+    // const { setUserData } = useContext(UserContext)
     const [signIn, setSignIn] = useState(initialSignIn)
     const [disabled, setDisabled] = useState(initialDisabled)
     const [errors, setErrors] = useState(initialErrors)
