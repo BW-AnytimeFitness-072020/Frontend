@@ -4,30 +4,30 @@ import * as yup from 'yup';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-const history = useHistory()
 
 const initialSignIn = {
-    username: '',
-    password: '',
-    user: {
-      client: false,
-      instructor: false,
-    },
-  }
+  username: '',
+  password: '',
+  user: {
+    client: false,
+    instructor: false,
+  },
+}
 
-  const initialErrors = {
-    username: '',
-    password: '',
-  }
-  
-  const initialDisabled = true
+const initialErrors = {
+  username: '',
+  password: '',
+}
+
+const initialDisabled = true
 
 export default function SignIn () { 
-   
-    const [signIn, setSignIn] = useState(initialSignIn)
-    const [disabled, setDisabled] = useState(initialDisabled)
+  
+  const [signIn, setSignIn] = useState(initialSignIn)
+  const [disabled, setDisabled] = useState(initialDisabled)
   const [errors, setErrors] = useState(initialErrors)
-
+  const history = useHistory()
+  
     const inputChange = (name, value) => {
         yup
           .reach(FormSchema, name)

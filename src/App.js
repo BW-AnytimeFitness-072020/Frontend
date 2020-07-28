@@ -4,15 +4,11 @@ import Home from './components/Home'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Classes from './components/Classes'
 import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
+
 import './App.css'
-
-
-
-
-
-
 
 function App() {
   
@@ -33,6 +29,9 @@ function App() {
       
     {/* <div className="App">
       <Header /></div> */}
+      </Row>
+      <Row>
+      <Col>
       <Switch>
         <Route path='/signin'>
           <SignIn />
@@ -41,7 +40,7 @@ function App() {
           <Register />
         </Route>
         <Route path='/classes'>
-          {/* <Classes /> */}
+          <Classes />
         </Route>
         <Route path='/about'>
           {/* <About /> */}
@@ -50,6 +49,7 @@ function App() {
         <Home />
         </Route>
       </Switch>
+      </Col>
       </Row>
     </Container>
   )
