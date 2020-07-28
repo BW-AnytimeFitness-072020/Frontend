@@ -3,7 +3,8 @@ import * as yup from 'yup';
 import { Link, Switch, Route } from 'react-router-dom';
 import axios from 'axios'
 import './App.css';
-import SignIn from './SignInPage.jsx'
+import SignIn from './SignInPage.jsx';
+import Register from './RegisterPage.jsx';
 import FormSchema from './FormSchema.js';
 
 const initialSignIn = {
@@ -73,10 +74,22 @@ function App() {
         <button>
           <Link to='/signin'>Sign In</Link>
         </button>
+        <button>
+          <Link to='/register'>Register</Link>
+        </button>
       </header>
       <Switch>
         <Route exact path='/signin'>
           <SignIn 
+          inputchange={inputChange}
+          disabled={disabled}
+          errors={errors}
+          signIn={signIn}
+          checkChange={checkChange}
+          submit={submit}/>
+        </Route>
+        <Route exact path='/register'>
+          <Register 
           inputchange={inputChange}
           disabled={disabled}
           errors={errors}
