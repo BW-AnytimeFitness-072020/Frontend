@@ -57,18 +57,13 @@ function App() {
     })
   }
 
-  const submit = page => {
-    page === 'signIn'?
-    axios.post(`${defaultURL}/signIn`, signIn):
-    axios.post(`${defaultURL}/register`, signIn)
+  const submit = () => {
+    axios.post(`${defaultURL()}/signIn`, signIn)
     .then(response => {
       console.log(response)
       localStorage.setItem("token", response.data.payload)
       setSignIn(initialSignIn)
-
-      page === 'signIn'?
-      history.push("/dashboard"):
-      history.push("/signin")
+      history.push("/dashboard")
     })
     .catch(error => {
       console.log(error)

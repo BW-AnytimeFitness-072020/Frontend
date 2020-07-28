@@ -5,7 +5,7 @@ export default function SignIn (props) {
 
     const onSubmit = e => {
         e.preventDefault()
-        submit('signIn')
+        submit()
     }
 
     const onInputChange = e => {
