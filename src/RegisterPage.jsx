@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SignIn (props) { 
+export default function Register (props) { 
     const {inputChange, disabled, errors, signIn, checkChange, submit} = props
 
     const onSubmit = e => {
@@ -22,7 +22,7 @@ export default function SignIn (props) {
         <form onSubmit={onSubmit}>
         <div className='container'>
             <h2>WELCOME!</h2>
-            <h3>Please Sign In</h3>
+            <h3>Please Register</h3>
             <div className='inputs'>
                 <label>
                     <input
@@ -30,6 +30,14 @@ export default function SignIn (props) {
                     onChange={onInputChange}
                     name='name'
                     type='text'
+                    />
+                </label>
+                <label>
+                    <input
+                        placeholder='Email Address'
+                        onChange={onInputChange}
+                        name='email'
+                        type='email'
                     />
                 </label>
                 <label>
@@ -59,7 +67,7 @@ export default function SignIn (props) {
                         />
                     </label>
                 </div> 
-                <button className='signInButton' disabled = {disabled}>Sign In</button>
+                <button className='registerButton' disabled = {disabled}>Sign In</button>
                 <div>{errors.name}</div>
             </div>
         </div>
