@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
-import { Link, Switch, Route } from 'react-router-dom';
+import { Link, Switch, Route, useHistory } from 'react-router-dom';
 import axios from 'axios'
 import './App.css';
 import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
 import FormSchema from './FormSchema.js';
+import defaultURL from './utils/apiHook'
 
 const initialSignIn = {
   username: '',
@@ -28,6 +29,8 @@ function App() {
   const [signIn, setSignIn] = useState(initialSignIn)
   const [disabled, setDisabled] = useState(initialDisabled)
   const [errors, setErrors] = useState(initialErrors)
+
+  const history = useHistory()
 
   const inputChange = (name, value) => {
     yup
@@ -54,8 +57,22 @@ function App() {
     })
   }
 
-  const submit = () => {
-    
+  const submit = page => {
+    page === 'signIn'?
+    axios.post(`${defaultURL}/signIn`, signIn):
+    axios.post(`${defaultURL}/register`, signIn)
+    .then(response => {
+      console.log(response)
+      localStorage.setItem("token", response.data.payload)
+      setSignIn(initialSignIn)
+
+      page === 'signIn'?
+      history.push("/dashboard"):
+      history.push("/signin")
+    })
+    .catch(error => {
+      console.log(error)
+    })
   }
 
   useEffect(() => {
