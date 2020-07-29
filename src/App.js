@@ -20,23 +20,23 @@ const initialUserData = {
   email: 'Jimmay@jimmay.com',
   password: 'Jimmay jr.',
   joinedclasses: [{
-    id: null,
+    id: 1,
     coursename: "Zoomba",
-    type: "Cardio",
+    type: "aerial",
     starttime: 12,
     duration: 50,
-    intensitylevel: "Medium",
-    location: "Florida",
+    intensitylevel: "medium",
+    location: "FL",
     sizecapacity: 25
   }],
   createdclasses: [{
-    id: null,
+    id: 1,
     coursename: "Zoomba",
-    type: "Cardio",
+    type: "aerial",
     starttime: 12,
     duration: 50,
-    intensitylevel: "Medium",
-    location: "Florida",
+    intensitylevel: "medium",
+    location: "FL",
     sizecapacity: 25
 
   }],
@@ -50,7 +50,7 @@ function App() {
   {/*^This state will allow us to grab data stored in the client/instructor anywhere we want*/}
 
   return (
-    <UserContext.Provider value={ userData }>
+    <UserContext.Provider value={{ userData, setUserData }}>
       <Container fluid={true}>
       <Row>
       <Col>

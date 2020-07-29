@@ -99,3 +99,13 @@ export const mililaryTime = {
     '23' : '23:00', 
     '24' : '24:00'
 }
+
+export const initialFormValues = {
+    coursename: '',
+    type: '',
+    starttime: 0,
+    duration: '',
+    intensitylevel: '',
+    location: '',
+    sizecapacity: '',
+  }

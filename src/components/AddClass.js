@@ -6,18 +6,9 @@ import Dropdown from './Dropdown'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { states, classCategories, mililaryTime } from '../constants/index'
+import { states, classCategories, mililaryTime, initialFormValues } from '../constants/index'
 
-const initialFormValues = {
-    coursename: '',
-    type: '',
-    starttime: 0,
-    duration: '',
-    intensitylevel: '',
-    location: '',
-    sizecapacity: '',
-  }
-  
+
   const initialFormErrors = {
     coursename: '',
     type: '',
@@ -31,9 +22,9 @@ const initialFormValues = {
   const initialClassInfo = []
   const initialDisabled = true
 
-function AddClass() {
+function AddClass(props) {
     const [classInfo, setClassInfo] = useState(initialClassInfo)
-    const [formValues, setFormValues] = useState(initialFormValues)
+    const { formValues, setFormValues, updatingBool, setUpdatingBool } = props
     const [formErrors, setFormErrors] = useState(initialFormErrors)
     const [disabled, setDisabled] = useState(initialDisabled)
 
@@ -47,7 +38,19 @@ function AddClass() {
           .catch(err => {
             console.log(err)
           })
-      }
+      }    
+    const updateClass = updatedClass => {
+        axios.put('https://reqres.in/api/users', updatedClass)
+        .then(res => {
+        setClassInfo([res.data, ...classInfo])
+        console.log(res.data)
+        setFormValues(initialFormValues)
+        setUpdatingBool(false)
+        })
+        .catch(err => {
+        console.log(err)
+        })
+    }
 
       const inputChange = (name, value) => {
         yup
@@ -81,7 +84,9 @@ function AddClass() {
             location: formValues.location.trim(),
             sizecapacity: formValues.sizecapacity.trim(),
         }
-        postNewClass(newClass)
+        updatingBool?
+        updateClass(newClass):
+        postNewClass(newClass);
       }
 
       useEffect(() => {
@@ -246,7 +251,10 @@ function AddClass() {
             </Row>
             <Row>
                 <Col>
-                    <button disabled={disabled}>Add My Class</button>
+                    <button disabled={disabled}>{updatingBool?
+                    "Update Class":
+                    "Add My Class"}
+                    </button>
                 </Col>
             </Row>
             </form>
