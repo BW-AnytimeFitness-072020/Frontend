@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { render } from '@testing-library/react';
 import { UserContext } from './contexts/userContext';
 import InstructorClassCard from './InstructorClassCard'
+import AddClass from './components/AddClass'
 
 export default function InstructorDash (){
   const userData = useContext(UserContext)
@@ -15,7 +15,7 @@ export default function InstructorDash (){
       </div>
       <div>
         <h3>Create a New Class</h3>
-
+        <AddClass />
       </div>
     </div>
   )
