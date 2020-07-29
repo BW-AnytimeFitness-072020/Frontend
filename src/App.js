@@ -7,10 +7,9 @@ import Col from 'react-bootstrap/Col'
 import Classes from './components/Classes'
 import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
-import Header from './header.jsx';
 import { UserContext } from './contexts/userContext';
 import './App.css'
-
+import Client from './ClientForm.jsx';
 
 
 
@@ -25,7 +24,9 @@ function App() {
 
   return (
     <UserContext.Provider value={ userData }>
-          {/* Put Client Page and Route inside */}
+          <Route path='/client'>
+            <Client />
+          </Route>
         
         
     <Container fluid={true}>

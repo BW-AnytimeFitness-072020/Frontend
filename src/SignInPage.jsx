@@ -3,7 +3,9 @@ import FormSchema from './FormSchema.js';
 import * as yup from 'yup';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from './contexts/userContext'
+import { UserContext } from './contexts/userContext';
+import Container from 'react-bootstrap/Container';
+
 
 
 const initialSignIn = {
@@ -90,7 +92,7 @@ export default function SignIn () {
 
     return (
         <form onSubmit={onSubmit}>
-        <div className='container'>
+        <Container fluid={true}>
             <h2>WELCOME!</h2>
             <h3>Please Sign In</h3>
             <div className='inputs'>
@@ -132,7 +134,7 @@ export default function SignIn () {
                 <button className='signInButton' disabled = {disabled}>Sign In</button>
                 <div>{errors.name}</div>
             </div>
-        </div>
+        </Container>
     </form>
     )
 }

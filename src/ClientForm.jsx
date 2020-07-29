@@ -36,7 +36,7 @@ export default function Client (user) {
         const availableClasses = classLists => {
                 Axios.get('https://reqres.in/api/users', classLists)
                 .then(response => {
-                    setClasses([response.data])
+                    setClasses([...classes, response.data])
                 })
                 .catch(err => {
                     console.log('error:', err)
