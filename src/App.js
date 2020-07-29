@@ -7,6 +7,8 @@ import Col from 'react-bootstrap/Col'
 import Classes from './components/Classes'
 import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
+import Header from './header.jsx';
+import InstructorDash from './InstructorDash'
 import { UserContext } from './contexts/userContext';
 import './App.css'
 import Client from './ClientForm.jsx';
@@ -14,7 +16,30 @@ import Client from './ClientForm.jsx';
 
 
 const initialUserData = {
+  username: 'Jimmay',
+  email: 'Jimmay@jimmay.com',
+  password: 'Jimmay jr.',
+  joinedclasses: [{
+    coursename: "Zoomba",
+    type: "Cardio",
+    starttime: 12,
+    duration: 50,
+    intensitylevel: "Medium",
+    location: "Florida",
+    sizecapacity: 25
+  }],
+  createdclasses: [{
+    coursename: "Zoomba",
+    type: "Cardio",
+    starttime: 12,
+    duration: 50,
+    intensitylevel: "Medium",
+    location: "Florida",
+    sizecapacity: 25
 
+  }],
+  client: false,
+  instructor: true,
 }
 
 
@@ -24,51 +49,49 @@ function App() {
 
   return (
     <UserContext.Provider value={ userData }>
-          <Route path='/client'>
-            <Client />
-          </Route>
-        
-        
-    <Container fluid={true}>
-    <Row>
-    <Col>
-                    Anytime Fitness
-                </Col>
-                <Col>
-                    <Link to='/'>Home</Link> </Col>
-                 <Col>   <Link to='/signin'>Sign In</Link></Col>
-                 <Col>   <Link to='/register'>Register</Link></Col>
-                 <Col>   <Link to='/classes'>Classes</Link></Col>
-                 <Col>   <Link to='/about'>About Us</Link>
-                </Col>
-      
-    {/* <div className="App">
-      <Header /></div> */}
-      </Row>
+      <Container fluid={true}>
       <Row>
       <Col>
-      <Switch>
-        <Route path='/signin'>
-          <SignIn />
-        </Route>
-        <Route path='/register'>
-          <Register />
-        </Route>
+                      Anytime Fitness
+                  </Col>
+                  <Col>
+                      <Link to='/'>Home</Link> </Col>
+                  <Col>   <Link to='/signin'>Sign In</Link></Col>
+                  <Col>   <Link to='/register'>Register</Link></Col>
+                  <Col>   <Link to='/classes'>Classes</Link></Col>
+                  <Col>   <Link to='/about'>About Us</Link>
+                  </Col>
         
-        <Route path='/classes'>
-          <Classes />
-        </Route>
-        <Route path='/about'>
-          {/* <About /> */}
-        </Route>
-        
-        <Route path='/'>
-        <Home />
-        </Route>
-      </Switch>
-      </Col>
-      </Row>
-    </Container>
+      {/* <div className="App">
+        <Header /></div> */}
+        </Row>
+        <Row>
+        <Col>
+        <Switch>
+          <Route path='/signin'>
+            <SignIn />
+          </Route>
+          <Route path='/register'>
+            <Register />
+          </Route>
+          
+          <Route path='/classes'>
+            <Classes />
+          </Route>
+          <Route path='/about'>
+            {/* <About /> */}
+          </Route>
+          <Route path='/instructor'>
+            <InstructorDash />
+          </Route>
+          
+          <Route path='/'>
+            <Home />
+          </Route>
+        </Switch>
+        </Col>
+        </Row>
+      </Container>
     </UserContext.Provider>
   )
 }
