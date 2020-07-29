@@ -8,7 +8,7 @@ import Classes from './components/Classes'
 import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
 import Header from './header.jsx';
-import InstructorForm from './InstructorForm'
+import InstructorDash from './InstructorDash'
 import { UserContext } from './contexts/userContext';
 import './App.css'
 
@@ -82,7 +82,7 @@ function App() {
             {/* <About /> */}
           </Route>
           <Route>
-            <InstructorForm path='/instructor'/>
+            <InstructorDash path='/instructor'/>
           </Route>
           
           <Route path='/'>
