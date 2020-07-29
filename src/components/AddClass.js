@@ -2,15 +2,16 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import * as yup from 'yup'
 import formSchemaAddClass from '../validation/formSchemaAddClass'
-import StatesDropdown from './StatesDropdown'
+import Dropdown from './StatesDropdown'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { states } from '../constants/index'
 
 const initialFormValues = {
     coursename: '',
     type: '',
-    starttime: '',
+    starttime: 0,
     duration: '',
     intensitylevel: '',
     location: '',
@@ -129,7 +130,7 @@ function AddClass() {
             </Row>
             <Row>
                 <Col>
-                    <label htmlFor='courseTypeInput'>Difficulty Level:&nbsp;
+                    <label htmlFor='courseTypeInput'>Class Type:&nbsp;
                         <select
                         id='courseTypeInput'
                         name='type'
@@ -137,9 +138,20 @@ function AddClass() {
                         onChange={onInputChange}
                         >
                         <option value=''>Select</option>
-                        <option value='easy'>Easy</option>
-                        <option value='medium'>Medium</option>
-                        <option value='hard'>Hard</option>
+                        <option value='aerial'>Aerial</option>
+                        <option value='barre'>Barre</option>
+                        <option value='boxing-kickboxing'>Boxing / Kickboxing</option>
+                        <option value='circuit-training'>Circuit Training</option>
+                        <option value='crossfit'>Crossfit</option>
+                        <option value='cycling'>Cycling</option>
+                        <option value='dance'>Dance</option>
+                        <option value='gymnastics'>Gymnastics</option>
+                        <option value='interval-training'>Interval Training</option>
+                        <option value='martial-arts'>Martial Arts</option>
+                        <option value='outdoor'>Outdoor</option>
+                        <option value='personal-training'>Personal Training</option>
+                        <option value='pilates'>Pilates</option>
+                        <option value='rock-climbing'>Rock Climbing</option>
                         </select>
                     </label>
                 </Col>
@@ -215,8 +227,31 @@ function AddClass() {
             </Row>
             <Row>
                 <Col>
+                    <label htmlFor='intensityLevelInput'>Intensity Level:&nbsp;
+                        <select
+                        id='intensityLevelInput'
+                        name='intensitylevel'
+                        value={formValues.intensitylevel}
+                        onChange={onInputChange}
+                        >
+                        <option value=''>Select</option>
+                        <option value='easy'>Easy</option>
+                        <option value='medium'>Medium</option>
+                        <option value='hard'>Hard</option>
+                        </select>
+                    </label>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    {formErrors.intensitylevel}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
                     <label htmlFor='locationInput'>Location:&nbsp;
-                    <StatesDropdown 
+                    <Dropdown
+                    data={states} 
                     id='locationInput'
                     name='location' 
                     value={formValues.location}

@@ -1,69 +1,16 @@
 import React from 'react'
+// import { states } from '../constants/index'
 
-const states = [
-    {'AK' : 'Alaska'},
-    {'AL' : 'Alabama'},
-    {'AR' : 'Arkansas'},
-    {'AS' : 'American Samoa'},
-    {'AZ' : 'Arizona'},
-    {'CA' : 'California'},
-    {'CO' : 'Colorado'},
-    {'CT' : 'Connecticut'},
-    {'DC' : 'District of Columbia'},
-    {'DE' : 'Delaware'},
-    {'FL' : 'Florida'},
-    {'GA' : 'Georgia'},
-    {'GU' : 'Guam'},
-    {'HI' : 'Hawaii'},
-    {'IA' : 'Iowa'},
-    {'ID' : 'Idaho'},
-    {'IL' : 'Illinois'},
-    {'IN' : 'Indiana'},
-    {'KS' : 'Kansas'},
-    {'KY' : 'Kentucky'},
-    {'LA' : 'Louisiana'},
-    {'MA' : 'Massachusetts'},
-    {'MD' : 'Maryland'},
-    {'ME' : 'Maine'},
-    {'MI' : 'Michigan'},
-    {'MN' : 'Minnesota'},
-    {'MO' : 'Missouri'},
-    {'MS' : 'Mississippi'},
-    {'MT' : 'Montana'},
-    {'NC' : 'North Carolina'},
-    {'ND' : 'North Dakota'},
-    {'NE' : 'Nebraska'},
-    {'NH' : 'New Hampshire'},
-    {'NJ' : 'New Jersey'},
-    {'NM' : 'New Mexico'},
-    {'NV' : 'Nevada'},
-    {'NY' : 'New York'},
-    {'OH' : 'Ohio'},
-    {'OK' : 'Oklahoma'},
-    {'OR' : 'Oregon'},
-    {'PA' : 'Pennsylvania'},
-    {'PR' : 'Puerto Rico'},
-    {'RI' : 'Rhode Island'},
-    {'SC' : 'South Carolina'},
-    {'SD' : 'South Dakota'},
-    {'TN' : 'Tennessee'},
-    {'TX' : 'Texas'},
-    {'UT' : 'Utah'},
-    {'VA' : 'Virginia'},
-    {'VI' : 'Virgin Islands'},
-    {'VT' : 'Vermont'},
-    {'WA' : 'Washington'},
-    {'WI' : 'Wisconsin'},
-    {'WV' : 'West Virginia'},
-    {'WY' : 'Wyoming'}]
 
-function StatesDropdown(props) {
+function Dropdown(props) {
     const {
+        data,
         id, 
         name,
         value,
         onChange,
-     } = props
+    } = props
+    const dataArray = Object.entries(data)
 
     return (
         <select
@@ -74,12 +21,12 @@ function StatesDropdown(props) {
         >
         <option value=''>Select</option>
             {
-            states.map(state => 
-                <option key={Object.keys(state)} value={Object.keys(state)}>{Object.values(state)}</option>
+            dataArray.map(data =>
+                <option key={data[0]} value={data[0]}>{data[1]}</option>
             )
             }
         </select>
     )
 }
 
-export default StatesDropdown
+export default Dropdown
