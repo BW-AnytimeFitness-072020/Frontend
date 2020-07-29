@@ -5,7 +5,7 @@ import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
 import Header from './header.jsx';
 import { UserContext } from './contexts/userContext';
-
+import Client from './ClientForm.jsx'
 
 
 
@@ -31,7 +31,9 @@ function App() {
           <Register />
         </Route>
         <UserContext.Provider value={ userData }>
-          {/* Put Client Page and Route inside */}
+          <Route path='/client'>
+            <Client />
+          </Route>
         </UserContext.Provider>
         <UserContext.Provider value={ userData }>
           {/* Put Instructor Page and Route inside */}
