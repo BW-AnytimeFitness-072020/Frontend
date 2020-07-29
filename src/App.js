@@ -81,8 +81,8 @@ function App() {
           <Route path='/about'>
             {/* <About /> */}
           </Route>
-          <Route>
-            <InstructorDash path='/instructor'/>
+          <Route path='/instructor'>
+            <InstructorDash />
           </Route>
           
           <Route path='/'>
