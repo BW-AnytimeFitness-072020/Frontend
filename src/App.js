@@ -20,6 +20,7 @@ const initialUserData = {
   email: 'Jimmay@jimmay.com',
   password: 'Jimmay jr.',
   joinedclasses: [{
+    id: null,
     coursename: "Zoomba",
     type: "Cardio",
     starttime: 12,
@@ -29,6 +30,7 @@ const initialUserData = {
     sizecapacity: 25
   }],
   createdclasses: [{
+    id: null,
     coursename: "Zoomba",
     type: "Cardio",
     starttime: 12,
