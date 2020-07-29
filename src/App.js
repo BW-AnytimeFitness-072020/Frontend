@@ -1,11 +1,16 @@
-import React, { useState} from 'react';
-import { Switch, Route } from 'react-router-dom';
-import './App.css';
+import React, {useState} from 'react'
+import { Link, Switch, Route } from 'react-router-dom'
+import Home from './components/Home'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Classes from './components/Classes'
 import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
 import Header from './header.jsx';
 import { UserContext } from './contexts/userContext';
-import Client from './ClientForm.jsx'
+import './App.css'
+
 
 
 
@@ -19,29 +24,53 @@ function App() {
   {/*^This state will allow us to grab data stored in the client/instructor anywhere we want*/}
 
   return (
-    <div className="App">
-      <Header />
+    <UserContext.Provider value={ userData }>
+          {/* Put Client Page and Route inside */}
+        
+        
+    <Container fluid={true}>
+    <Row>
+    <Col>
+                    Anytime Fitness
+                </Col>
+                <Col>
+                    <Link to='/'>Home</Link> </Col>
+                 <Col>   <Link to='/signin'>Sign In</Link></Col>
+                 <Col>   <Link to='/register'>Register</Link></Col>
+                 <Col>   <Link to='/classes'>Classes</Link></Col>
+                 <Col>   <Link to='/about'>About Us</Link>
+                </Col>
+      
+    {/* <div className="App">
+      <Header /></div> */}
+      </Row>
+      <Row>
+      <Col>
       <Switch>
-        <UserContext.Provider value={ setUserData }>
-          <Route path='/signin'>
-            <SignIn />
-          </Route>
-        </UserContext.Provider>
+        <Route path='/signin'>
+          <SignIn />
+        </Route>
         <Route path='/register'>
           <Register />
         </Route>
-        <UserContext.Provider value={ userData }>
-          <Route path='/client'>
-            <Client />
-          </Route>
-        </UserContext.Provider>
-        <UserContext.Provider value={ userData }>
-          {/* Put Instructor Page and Route inside */}
-        </UserContext.Provider>
+        
+        <Route path='/classes'>
+          <Classes />
+        </Route>
+        <Route path='/about'>
+          {/* <About /> */}
+        </Route>
+        
+        <Route path='/'>
+        <Home />
+        </Route>
       </Switch>
-     
-    </div>
-  );
+      </Col>
+      </Row>
+    </Container>
+    </UserContext.Provider>
+  )
 }
 
-export default App;
+export default App
+
