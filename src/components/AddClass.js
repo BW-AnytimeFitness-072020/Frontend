@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import * as yup from 'yup'
 import formSchemaAddClass from '../validation/formSchemaAddClass'
@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { states, classCategories, mililaryTime, initialFormValues } from '../constants/index'
+import { UserContext } from '../contexts/userContext'
 
 
   const initialFormErrors = {
@@ -19,19 +20,23 @@ import { states, classCategories, mililaryTime, initialFormValues } from '../con
     sizecapacity: '',
   }
   
-  const initialClassInfo = []
+//   const initialClassInfo = []
   const initialDisabled = true
 
 function AddClass(props) {
-    const [classInfo, setClassInfo] = useState(initialClassInfo)
+    // const [classInfo, setClassInfo] = useState(initialClassInfo)
     const { formValues, setFormValues, updatingBool, setUpdatingBool } = props
     const [formErrors, setFormErrors] = useState(initialFormErrors)
     const [disabled, setDisabled] = useState(initialDisabled)
+    const { userData, setUserData } = useContext(UserContext)
 
     const postNewClass = newClass => {
         axios.post('https://reqres.in/api/users', newClass)
           .then(res => {
-            setClassInfo([res.data, ...classInfo])
+            setUserData({
+                ...userData,
+                createdclasses: [userData.createdclasses, res.data]
+            })
             console.log(res.data)
             setFormValues(initialFormValues)
           })
@@ -40,16 +45,24 @@ function AddClass(props) {
           })
       }    
     const updateClass = updatedClass => {
-        axios.put('https://reqres.in/api/users', updatedClass)
+        axios.put(`https://reqres.in/api/users/${updatedClass.id}`, updatedClass)
         .then(res => {
-        setClassInfo([res.data, ...classInfo])
-        console.log(res.data)
-        setFormValues(initialFormValues)
-        setUpdatingBool(false)
+            setUserData({
+                ...userData,
+                createdclasses: userData.createdclasses.map(eachClass => {
+                    return eachClass.id === updatedClass.id?
+                    updatedClass:
+                    eachClass;
+                })
+            })
+            console.log(res.data)
+            setFormValues(initialFormValues)
+            setUpdatingBool(false)
         })
         .catch(err => {
         console.log(err)
         })
+
     }
 
       const inputChange = (name, value) => {

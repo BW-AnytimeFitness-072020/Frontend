@@ -15,7 +15,7 @@ export default function InstructorClassCard(props) {
       setUserData({
         ...userData,
         createdclasses: userData.createdclasses.filter(eachClass => {
-          return eachClass.id === classId
+          return eachClass.id !== classId
         })
       })
     })

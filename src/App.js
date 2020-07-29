@@ -23,21 +23,21 @@ const initialUserData = {
     id: 1,
     coursename: "Zoomba",
     type: "aerial",
-    starttime: 12,
-    duration: 50,
+    starttime: '12',
+    duration: '50',
     intensitylevel: "medium",
     location: "FL",
-    sizecapacity: 25
+    sizecapacity: '25'
   }],
   createdclasses: [{
     id: 1,
     coursename: "Zoomba",
     type: "aerial",
-    starttime: 12,
-    duration: 50,
+    starttime: '12',
+    duration: '50',
     intensitylevel: "medium",
     location: "FL",
-    sizecapacity: 25
+    sizecapacity: '25'
 
   }],
   client: false,
