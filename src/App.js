@@ -7,11 +7,11 @@ import Col from 'react-bootstrap/Col'
 import Classes from './components/Classes'
 import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
-import Header from './header.jsx';
+// import Header from './header.jsx';
 import InstructorDash from './InstructorDash'
 import { UserContext } from './contexts/userContext';
 import './App.css'
-import Client from './ClientForm.jsx';
+ import Client from './ClientForm.jsx';
 
 
 
@@ -74,7 +74,9 @@ function App() {
           <Route path='/register'>
             <Register />
           </Route>
-          
+          <Route exact path='/client'>
+              <Client />
+            </Route>
           <Route path='/classes'>
             <Classes />
           </Route>
