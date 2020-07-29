@@ -4,9 +4,30 @@ import * as yup from 'yup';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from './contexts/userContext';
-import Container from 'react-bootstrap/Container';
+import styled from 'styled-components';
 
-
+const Container=styled.div`
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 10% 25%;
+background-color: #CFD2E8;
+padding: 5%;
+border: solid 5px #665770;
+`
+const Checkbox=styled.div`
+display:flex;
+justify-content: space-evenly;
+`
+const Label=styled.div`
+display:flex;
+align-items: center;
+justify-content:space-between;
+`
+const Input=styled.input`
+margin: 10px;
+`
 
 const initialSignIn = {
     username: '',
@@ -92,7 +113,7 @@ export default function SignIn () {
 
     return (
         <form onSubmit={onSubmit}>
-        <Container fluid={true}>
+        <Container >
             <h2>WELCOME!</h2>
             <h3>Please Sign In</h3>
             <div className='inputs'>
@@ -114,22 +135,24 @@ export default function SignIn () {
                 </label>
                 <div className='checkboxes'>
                     <h4>Tell us if you are a client or Instructor</h4>
-                    <label>Client
-                        <input
-                        type='checkbox'
-                        name='client'
-                        onChange={onCheckChange}
-                        checked={signIn.user.client === true }
-                        />
-                    </label>
-                    <label>Instructor
-                        <input
-                        type='checkbox'
-                        name='instructor'
-                        onChange={onCheckChange}
-                        checked={signIn.user.instructor === true }
-                        />
-                    </label>
+                    <Checkbox>
+                        <Label>Client
+                          <Input
+                          type='checkbox'
+                          name='client'
+                          onChange={onCheckChange}
+                          checked={signIn.user.client === true }
+                          />
+                        </Label>
+                      <Label>Instructor
+                          <Input
+                          type='checkbox'
+                          name='instructor'
+                          onChange={onCheckChange}
+                          checked={signIn.user.instructor === true }
+                          />
+                        </Label>
+                    </Checkbox>
                 </div> 
                 <button className='signInButton' disabled = {disabled}>Sign In</button>
                 <div>{errors.name}</div>
