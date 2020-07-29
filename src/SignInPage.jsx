@@ -15,6 +15,7 @@ margin: 10% 25%;
 background-color: #CFD2E8;
 padding: 5%;
 border: solid 5px #665770;
+border-radius: 15%;
 `
 const Checkbox=styled.div`
 display:flex;
@@ -27,6 +28,10 @@ justify-content:space-between;
 `
 const Input=styled.input`
 margin: 10px;
+`
+const SignInButton=styled.button`
+background-color: #e80008;
+color: black;
 `
 
 const initialSignIn = {
@@ -154,7 +159,7 @@ export default function SignIn () {
                         </Label>
                     </Checkbox>
                 </div> 
-                <button className='signInButton' disabled = {disabled}>Sign In</button>
+                <SignInButton className='signInButton' disabled = {disabled}>Sign In</SignInButton>
                 <div>{errors.name}</div>
             </div>
         </Container>
