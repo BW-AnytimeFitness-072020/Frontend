@@ -3,7 +3,38 @@ import * as yup from 'yup';
 import FormSchema from './FormSchema.js';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
+const Container=styled.div`
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 10% 25%;
+background-color: #CFD2E8;
+padding: 5%;
+border: solid 5px #665770;
+border-radius: 15%;
+`
+const Checkbox=styled.div`
+display:flex;
+justify-content: space-evenly;
+`
+const Label=styled.div`
+display:flex;
+align-items: center;
+justify-content:space-between;
+`
+const Input=styled.input`
+margin: 10px;
+`
+const PlaceHolders=styled.div`
+display:flex;
+`
+const RegisterButton=styled.button`
+background-color: #e80008;
+color: black;
+`
 const initialRegistration = {
     username: '',
     email:'',
@@ -89,57 +120,59 @@ export default function Register () {
 
     return (
         <form onSubmit={onSubmit}>
-        <div className='container'>
+        <Container>
             <h2>WELCOME!</h2>
             <h3>Please Register</h3>
             <div className='inputs'>
-                <label>
-                    <input
-                    placeholder='UserName'
-                    onChange={onInputChange}
-                    name='name'
-                    type='text'
-                    />
-                </label>
-                <label>
-                    <input
-                        placeholder='Email Address'
-                        onChange={onInputChange}
-                        name='email'
-                        type='email'
-                    />
-                </label>
-                <label>
-                    <input
-                    placeholder='Password'
-                    onChange={onInputChange}
-                    name='password'
-                    type='text'
-                    />
-                </label>
-                <div className='checkboxes'>
+              <PlaceHolders>
+                  <label>
+                      <input
+                      placeholder='UserName'
+                      onChange={onInputChange}
+                      name='name'
+                      type='text'
+                      />
+                  </label>
+                  <label>
+                      <input
+                          placeholder='Email Address'
+                          onChange={onInputChange}
+                          name='email'
+                          type='email'
+                      />
+                  </label>
+                  <label>
+                      <input
+                      placeholder='Password'
+                      onChange={onInputChange}
+                      name='password'
+                      type='text'
+                      />
+                  </label>
+                </PlaceHolders>
+                <Checkbox>
                     <h4>Tell us if you are a client or Instructor</h4>
-                    <label>Client
-                        <input
+                    <Label>Client
+                        <Input
                         type='checkbox'
                         name='client'
                         onChange={onCheckChange}
                         checked={registration.user.client === true }
                         />
-                    </label>
-                    <label>Instructor
-                        <input
+                    </Label>
+                    <Label>Instructor
+                        <Input
                         type='checkbox'
                         name='instructor'
                         onChange={onCheckChange}
                         checked={registration.user.instructor === true }
                         />
-                    </label>
-                </div> 
-                <button className='registerButton' disabled = {disabled}>Sign In</button>
+                    </Label>
+                </Checkbox> 
+                <RegisterButton className='registerButton' disabled = {disabled}>Register</RegisterButton>
                 <div>{errors.name}</div>
             </div>
-        </div>
+        </Container>
     </form>
     )
 }
