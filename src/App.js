@@ -6,13 +6,13 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Classes from './components/Classes'
-import SignIn from './SignInPage.jsx';
-import Register from './RegisterPage.jsx';
+import SignIn from './elizabethComponents/SignInPage.jsx';
+import Register from './elizabethComponents/RegisterPage.jsx';
 // import Header from './header.jsx';
 import InstructorDash from './InstructorDash'
 import { UserContext } from './contexts/userContext';
 import './App.css'
- import Client from './ClientForm.jsx';
+ import Client from './elizabethComponents/ClientForm.jsx';
 
 
 

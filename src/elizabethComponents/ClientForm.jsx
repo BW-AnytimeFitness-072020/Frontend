@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ClassCard from './clientClassCard'
 import Axios from 'axios';
 import styled from 'styled-components';
-import {axiosWithAuth} from './utils/axiosWithAuth'
+import {axiosWithAuth} from '../utils/axiosWithAuth'
 
 const Container = styled.div`
 display:flex;

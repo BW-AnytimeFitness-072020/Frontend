@@ -76,13 +76,13 @@ export default function Register () {
           setRegistration({...registration, [name]: value})
       }
     
-      const checkChange = (name, isChecked) => {
-        setRegistration({
-          ...registration, users: {
-            ...registration.users, [name]: isChecked,
-          }
-        })
-      }
+      // const checkChange = (name, isChecked) => {
+      //   setRegistration({
+      //     ...registration, users: {
+      //       ...registration.users, [name]: isChecked,
+      //     }
+      //   })
+      // }
     
       const submit = () => {
         axios.post('https://reqres.in/api/users/signIn', registration)
@@ -113,10 +113,10 @@ export default function Register () {
         inputChange(name, value)
     }
 
-    const onCheckChange = e => {
-        const {name, checked} = e.target
-        checkChange(name, checked)
-    }
+    // const onCheckChange = e => {
+    //     const {name, checked} = e.target
+    //     checkChange(name, checked)
+    // }
 
     return (
         <form onSubmit={onSubmit}>
@@ -150,7 +150,7 @@ export default function Register () {
                       />
                   </label>
                 </PlaceHolders>
-                <Checkbox>
+                {/* <Checkbox>
                     <h4>Tell us if you are a client or Instructor</h4>
                     <Label>Client
                         <Input
@@ -168,7 +168,7 @@ export default function Register () {
                         checked={registration.user.instructor === true }
                         />
                     </Label>
-                </Checkbox> 
+                </Checkbox>  */}
                 <RegisterButton className='registerButton' disabled = {disabled}>Register</RegisterButton>
                 <div>{errors.name}</div>
             </div>
