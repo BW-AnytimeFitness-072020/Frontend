@@ -100,6 +100,15 @@ export const mililaryTime = {
     '24' : '24:00'
 }
 
+export const initialFormValues = {
+    coursename: '',
+    type: '',
+    starttime: 0,
+    duration: '',
+    intensitylevel: '',
+    location: '',
+    sizecapacity: '',
+  }
 export const gitHubUsers = [
     'code-dependent',
     'mjschuette4',
