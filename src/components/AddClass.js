@@ -11,7 +11,7 @@ import { states, classCategories, mililaryTime } from '../constants/index'
 const initialFormValues = {
     coursename: '',
     type: '',
-    starttime: 0,
+    starttime: '',
     duration: '',
     intensitylevel: '',
     location: '',

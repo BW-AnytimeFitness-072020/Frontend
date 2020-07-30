@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Link, Switch, Route } from 'react-router-dom'
 import Home from './components/Home'
+import About from './components/About'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -58,7 +59,7 @@ function App() {
           <Classes />
         </Route>
         <Route path='/about'>
-          {/* <About /> */}
+          <About />
         </Route>
         
         <Route path='/'>

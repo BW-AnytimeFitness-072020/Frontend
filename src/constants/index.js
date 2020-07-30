@@ -99,3 +99,11 @@ export const mililaryTime = {
     '23' : '23:00', 
     '24' : '24:00'
 }
+
+export const gitHubUsers = [
+    'code-dependent',
+    'mjschuette4',
+    '1like2learn',
+    'ginxy13th',
+    'kc0buk',
+]
