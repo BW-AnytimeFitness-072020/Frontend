@@ -11,6 +11,7 @@ const formSchemaAddClass = yup.object().shape({
   coursename: yup
     .string()
     .max(250)
+    .matches(/^[a-zA-Z0-9!$&#\'\?\(\)\-\"\: ]+$/, 'You have entered invalid characters')
     .required('Course name is required'),
   type: yup
     .string()
