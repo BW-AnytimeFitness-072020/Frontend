@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import * as yup from 'yup';
-import FormSchema from './FormSchema.js';
+import FormSchemaRegister from './FormSchemaRegister.js';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import apiHook from "./utils/apiHook";
 
 const Container=styled.div`
 display:flex;
@@ -61,7 +62,7 @@ export default function Register () {
     const history = useHistory()
     const inputChange = (name, value) => {
         yup
-          .reach(FormSchema, name)
+          .reach(FormSchemaRegister, name)
           .validate(value)
           .then(valid => {
             setErrors({
@@ -78,19 +79,26 @@ export default function Register () {
     
       const checkChange = (name, isChecked) => {
         setRegistration({
-          ...registration, users: {
-            ...registration.users, [name]: isChecked,
+          ...registration, user: {
+            ...registration.user, [name]: isChecked,
           }
         })
       }
     
       const submit = () => {
-        axios.post('https://reqres.in/api/users/signIn', registration)
+        const userCredentials = {
+            username: registration.username,
+            email: registration.email,
+            password: registration.password
+        }
+        const endpointUrl = registration.user.client === true?
+        'createnewuser':
+        'createinstructor';
+        axios.post(`${apiHook()}${endpointUrl}`, userCredentials)
         .then(response => {
-          console.log(response)
           localStorage.setItem("token", response.data.payload)
           setRegistration(initialRegistration)
-          history.push("/dashboard")
+          history.push("/signin")
         })
         .catch(error => {
           console.log(error)
@@ -98,7 +106,7 @@ export default function Register () {
       }
     
       useEffect(() => {
-        FormSchema.isValid(registration).then(valid => {
+        FormSchemaRegister.isValid(registration).then(valid => {
           setDisabled(!valid)
         }, [registration])
       })
@@ -129,7 +137,7 @@ export default function Register () {
                       <input
                       placeholder='UserName'
                       onChange={onInputChange}
-                      name='name'
+                      name='username'
                       type='text'
                       />
                   </label>
@@ -146,7 +154,7 @@ export default function Register () {
                       placeholder='Password'
                       onChange={onInputChange}
                       name='password'
-                      type='text'
+                      type='password'
                       />
                   </label>
                 </PlaceHolders>

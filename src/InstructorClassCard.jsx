@@ -13,7 +13,7 @@ export default function InstructorClassCard(props) {
     .then(response => {
       setUserData({
         ...userData,
-        createdclasses: userData.createdclasses.filter(eachClass => {
+        instructorcourses: userData.instructorcourses.filter(eachClass => {
           return eachClass.id !== classId
         })
       })

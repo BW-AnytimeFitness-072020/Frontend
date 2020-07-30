@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { states, classCategories, mililaryTime, initialFormValues } from '../constants/index'
 import { UserContext } from '../contexts/userContext'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 
   const initialFormErrors = {
@@ -31,11 +32,12 @@ function AddClass(props) {
     const { userData, setUserData } = useContext(UserContext)
 
     const postNewClass = newClass => {
-        axios.post('https://reqres.in/api/users', newClass)
+        axiosWithAuth()
+        .post('courses/course', newClass)
           .then(res => {
             setUserData({
                 ...userData,
-                createdclasses: [...userData.createdclasses, res.data]
+                instructorcourses: [...userData.instructorcourses, res.data]
             })
             setFormValues(initialFormValues)
           })
@@ -44,17 +46,17 @@ function AddClass(props) {
           })
       }    
     const updateClass = updatedClass => {
-        axios.put(`https://reqres.in/api/users/${updatedClass.id}`, updatedClass)
+        axiosWithAuth()
+        .put(`courses/course/${updatedClass.id}`, updatedClass)
         .then(res => {
             setUserData({
                 ...userData,
-                createdclasses: userData.createdclasses.map(eachClass => {
+                instructorcourses: userData.instructorcourses.map(eachClass => {
                     return eachClass.id === updatedClass.id?
                     updatedClass:
                     eachClass;
                 })
             })
-            console.log(res.data)
             setFormValues(initialFormValues)
             setUpdatingBool(false)
         })
@@ -107,10 +109,6 @@ function AddClass(props) {
           setDisabled(!valid)
         })
       }, [formValues])
-      useEffect(() => {
-        console.log('userData.createdclasses useEffect', userData.createdclasses);
-          
-      }, [userData.createdclasses])
       const onInputChange = event => {
         const { name, value } = event.target
         inputChange(name, value)

@@ -23,7 +23,7 @@ export default function InstructorDash (){
       <h2>Welcome {userData.username}</h2>
       <div>
         <h3>Your Classes</h3>
-          {userData.createdclasses.map(createdClass => <InstructorClassCard key={createdClass.id} {...{createdClass, setFormValues, setUpdatingBool}}/>)}
+          {userData.instructorcourses.map(createdClass => <InstructorClassCard key={createdClass.id} {...{createdClass, setFormValues, setUpdatingBool}}/>)}
       </div>
       <div>
         <h3>Create a New Class</h3>
