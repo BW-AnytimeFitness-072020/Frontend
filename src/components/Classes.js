@@ -7,10 +7,12 @@ import AddClass from './AddClass'
 function Classes() {
 
     return (
-        <Container>
+        <Row>
+        <Col>
         <h1>Classes</h1>
             <AddClass />
-        </Container>
+            </Col>
+        </Row>
     )
 }
 
