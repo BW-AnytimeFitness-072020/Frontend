@@ -3,7 +3,6 @@ import axios from 'axios'
 import * as yup from 'yup'
 import formSchemaAddClass from '../validation/formSchemaAddClass'
 import Dropdown from './Dropdown'
-import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { states, classCategories, mililaryTime, initialFormValues } from '../constants/index'
@@ -14,6 +13,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth'
   const initialFormErrors = {
     coursename: '',
     type: '',
+    date: '',
     starttime: '',
     duration: '',
     intensitylevel: '',
@@ -93,6 +93,7 @@ function AddClass(props) {
             id: formValues.id,
             coursename: formValues.coursename.trim(),
             type: formValues.type.trim(),
+            date: formValues.date.trim(),
             starttime: formValues.starttime.trim(),
             duration: formValues.duration.trim(),
             intensitylevel: formValues.intensitylevel.trim(),
@@ -120,35 +121,30 @@ function AddClass(props) {
       }
 
     return (
-        <Container>
+        <Row className='justify-content-center'>
             <form onSubmit={onSubmit}>
             <Row>
                 <Col>
-                    <h3>Class Info</h3>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <label htmlFor='courseNameInput'>
+                    <div className='form-group'>
+                    <label htmlFor='courseNameInput' className='sr-only'>Class Name</label>
                         <input 
                             id='courseNameInput'
                             name='coursename'
                             type='text'
-                            placeholder='Course name'
-                            size='50'
+                            placeholder='Class Name'
+                            className='form-control'
                             onChange={onInputChange}
                             value={formValues.coursename}
                         />
-                    </label>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
+                        <div className=' alert-warning'>
                     {formErrors.coursename}
+                        </div>
+                    </div>
                 </Col>
             </Row>
             <Row>
                 <Col>
+                <div className='form-group'>
                     <label htmlFor='courseTypeInput'>Class Type:&nbsp;
                         <Dropdown
                             data={classCategories} 
@@ -158,15 +154,34 @@ function AddClass(props) {
                             onChange={onInputChange}
                     />
                     </label>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
+                    <div className=' alert-warning'>
                     {formErrors.type}
+                    </div>
+                    </div>
                 </Col>
             </Row>
             <Row>
                 <Col>
+                    <div className='form-group'>
+                    <label htmlFor='courseDateInput' className='sr-only'>Class Date</label>
+                        <input 
+                            id='courseDateInput'
+                            name='date'
+                            type='date'
+                            placeholder='Class Date'
+                            className='form-control'
+                            onChange={onInputChange}
+                            value={formValues.date}
+                        />
+                        <div className=' alert-warning'>
+                    {formErrors.date}
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                <div className='form-group'>
                     <label htmlFor='courseStarttimeInput'>Class Start Time:&nbsp;
                         <Dropdown
                     data={mililaryTime} 
@@ -176,16 +191,17 @@ function AddClass(props) {
                     onChange={onInputChange}
                     />
                     </label>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
+                    <div className=' alert-warning'>
                     {formErrors.starttime}
+                    </div>
+                </div>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <label htmlFor='courseDurationInput'>
+                <div className='form-group'>
+                    <label htmlFor='courseDurationInput' className='sr-only'>
+                    Course Duration</label>
                         <input
                         id='courseDurationInput'
                         name='duration'
@@ -195,16 +211,15 @@ function AddClass(props) {
                         value={formValues.duration}
                         onChange={onInputChange}
                         />
-                    </label>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
+                        <div className=' alert-warning'>
                     {formErrors.duration}
+                        </div>
+                </div>
                 </Col>
             </Row>
             <Row>
                 <Col>
+                <div className='form-group'>
                     <label htmlFor='intensityLevelInput'>Intensity Level:&nbsp;
                         <select
                         id='intensityLevelInput'
@@ -218,15 +233,15 @@ function AddClass(props) {
                         <option value='hard'>Hard</option>
                         </select>
                     </label>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
+                    <div className=' alert-warning'>
                     {formErrors.intensitylevel}
+                    </div>
+                </div>
                 </Col>
             </Row>
             <Row>
                 <Col>
+                <div className='form-group'>
                     <label htmlFor='locationInput'>Location:&nbsp;
                     <Dropdown
                     data={states} 
@@ -236,43 +251,44 @@ function AddClass(props) {
                     onChange={onInputChange}
                     />
                     </label>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
+                    <div className=' alert-warning'>
                     {formErrors.location}
+                    </div>
+                </div>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <label htmlFor='courseSizeInput'>
+                <div className='form-group'>
+                    <label htmlFor='courseSizeInput' className='sr-only'>
+                    Class Capacity</label>
                         <input 
                             id='courseSizeInput'
                             name='sizecapacity'
                             type='text'
-                            placeholder='Class capacity'
+                            placeholder='Class Capacity'
                             size='50'
                             onChange={onInputChange}
                             value={formValues.sizecapacity}
                         />
-                    </label>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
+                    <div className=' alert-warning'>
                     {formErrors.sizecapacity}
+                    </div>
+                </div>
                 </Col>
             </Row>
             <Row>
                 <Col>
+                <div className='form-group'>
                     <button disabled={disabled}>{updatingBool?
                     "Update Class":
                     "Add My Class"}
                     </button>
+                </div>
                 </Col>
             </Row>
             </form>
-        </Container>
+        </Row>
     )
 }
 

@@ -5,11 +5,14 @@ import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Container from 'react-bootstrap/Container'
 
 render(
+  <Container fluid={true}>
   <Router>
     <App />
   </Router>
+    </Container>
   ,document.querySelector('#root')
 );
 

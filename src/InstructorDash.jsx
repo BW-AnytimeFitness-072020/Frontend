@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import { UserContext } from './contexts/userContext';
 import InstructorClassCard from './InstructorClassCard';
 import AddClass from './components/AddClass';
-// import { initialFormValues } from './constants'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const initialFormValues = {
   coursename: '',

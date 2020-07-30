@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Link, Switch, Route } from 'react-router-dom'
 import Home from './components/Home'
 import About from './components/About'
-import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Classes from './components/Classes'
@@ -111,7 +110,7 @@ function App() {
   },[])
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
-      <Container fluid={true}>
+      
       <Row>
       <Col>
                       Anytime Fitness
@@ -150,7 +149,7 @@ function App() {
         </Switch>
         </Col>
         </Row>
-      </Container>
+     
     </UserContext.Provider>
   )
 }

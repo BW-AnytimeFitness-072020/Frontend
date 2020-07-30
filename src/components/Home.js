@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link, Switch, Route } from 'react-router-dom';
-import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Carousel from 'react-bootstrap/Carousel'
@@ -8,8 +7,8 @@ import Carousel from 'react-bootstrap/Carousel'
 function Home(props) {
 
     return (
-        <Container fluid={true}>
             <Row>
+            <Col>
         <Carousel controls={false} indicators={false} wrap={true}>
             <Carousel.Item>
                 <img
@@ -100,8 +99,8 @@ function Home(props) {
                     />
             </Carousel.Item>
         </Carousel>
+        </Col>
         </Row>
-        </Container>
     )
 }
 
