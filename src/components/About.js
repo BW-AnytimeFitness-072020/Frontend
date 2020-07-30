@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import AboutCard from './AboutCard'
 import { gitHubUsers } from '../constants/index'
 
 
 function About() {
     const [userData, setUserData] = useState([])
-    const [toggle, setToggle] = useState(false)
     
-
+    {/* calls getAllData on the first render and sets the response into state via setUserData */}
     useEffect(() => {
         getAllData()
             .then ( response => {
@@ -20,10 +20,12 @@ function About() {
             })
     }, [])
 
+    {/* getAllData calls getUserData and passes in the array (gitHubUsers) to iterate over -- Promise.all() gathers the responses from each axios call and returns one big object after all axios calls have completed */}
     function getAllData() {
         return Promise.all(gitHubUsers.map( item => getUserData(item)))
     }
 
+    {/* getUserData retrieves individual user profile data from GitHub and returns the entire object */}
     function getUserData(user) {
          return axios.get(`https://api.github.com/users/${user}`)
             .then(response => {
@@ -38,9 +40,11 @@ function About() {
     
    
     return (
-        <Container>
+        <Row>
+        <Col>
             <AboutCard data={userData} />
-        </Container>
+            </Col>
+        </Row>
     )
 }
 

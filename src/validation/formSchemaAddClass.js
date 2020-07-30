@@ -2,10 +2,15 @@ import React from 'react'
 import * as yup from 'yup'
 import { states, classCategories, mililaryTime } from '../constants/index'
 
-const stateAbbreviations = Array.from(Object.keys(states))
+{/* The three variables below generate the list of state abbreviations for oneOf criteria in type, starttime and location in schema below from the objects supplied under constants imported above */}
+const stateAbbreviations = Array.from(Object.keys(states)) 
 const classList = Array.from(Object.keys(classCategories))
 const timeArray = Array.from(Object.keys(mililaryTime))
-// console.log(timeArray)
+
+{/* Sets minDate to yesterday to disallow entering dates in the past into input form */}
+const minDate = new Date()
+minDate.setDate(minDate.getDate() - 1)
+
 
 const formSchemaAddClass = yup.object().shape({
   coursename: yup
@@ -17,6 +22,10 @@ const formSchemaAddClass = yup.object().shape({
     .string()
     .oneOf(classList, 'Class type is required')
     .required('Class type is required'),
+  date: yup
+    .date().typeError('Please enter a date in the format mm/dd/yyyy')
+    .min(minDate, 'You can not enter a date in the past')
+    .required('Class date is required'),
   starttime: yup
     .string()
     .oneOf(timeArray, 'Start time is required')

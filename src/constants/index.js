@@ -103,6 +103,7 @@ export const mililaryTime = {
 export const initialFormValues = {
     coursename: '',
     type: '',
+    date: '',
     starttime: 0,
     duration: '',
     intensitylevel: '',
