@@ -11,7 +11,6 @@ export default function InstructorClassCard(props) {
     axiosWithAuth()
     .delete(`/courses/courses/${classId}`)
     .then(response => {
-      console.log(response)
       setUserData({
         ...userData,
         createdclasses: userData.createdclasses.filter(eachClass => {
@@ -32,7 +31,7 @@ export default function InstructorClassCard(props) {
     <p>Location: {location}</p>
     <p>Class Capacity: {sizecapacity}</p>
     <button onClick={() => {
-      setFormValues(createdClass)
+      setFormValues(...createdClass)
       setUpdatingBool(true)
     }}>Update</button>
     <button onClick={() => deleteClass(id)}>Delete</button>

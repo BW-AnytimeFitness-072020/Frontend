@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Link, Switch, Route } from 'react-router-dom'
 import Home from './components/Home'
 import Container from 'react-bootstrap/Container'
@@ -46,48 +46,49 @@ const initialUserData = {
 
 
 function App() {
-  const [ userData, setUserData] = useState(initialUserData)
-  {/*^This state will allow us to grab data stored in the client/instructor anywhere we want*/}
+  const [userData, setUserData] = useState(initialUserData)
+  console.log('userData', userData);
+  {/*^This state will allow us to grab data stored in the client/instructor anywhere we want*/ }
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
       <Container fluid={true}>
-      <Row>
-      <Col>
-                      Anytime Fitness
-                  </Col>
-                  <Col>
-                      <Link to='/'>Home</Link> </Col>
-                  <Col>   <Link to='/signin'>Sign In</Link></Col>
-                  <Col>   <Link to='/register'>Register</Link></Col>
-                  <Col>   <Link to='/instructor'>Dashboard</Link></Col>
-                  <Col>   <Link to='/about'>About Us</Link>
-                  </Col>
-        
-      {/* <div className="App">
+        <Row>
+          <Col>
+            Anytime Fitness
+          </Col>
+          <Col>
+            <Link to='/'>Home</Link> </Col>
+          <Col><Link to='/signin'>Sign In</Link></Col>
+          <Col><Link to='/register'>Register</Link></Col>
+          <Col><Link to='/instructor'>Dashboard</Link></Col>
+          <Col><Link to='/about'>About Us</Link>
+          </Col>
+
+          {/* <div className="App">
         <Header /></div> */}
         </Row>
         <Row>
-        <Col>
-        <Switch>
-          <Route path='/signin'>
-            <SignIn />
-          </Route>
-          <Route path='/register'>
-            <Register />
-          </Route>
-          <Route path='/about'>
-            {/* <About /> */}
-          </Route>
-          <Route path='/instructor'>
-            <InstructorDash />
-          </Route>
-          
-          <Route path='/'>
-            <Home />
-          </Route>
-        </Switch>
-        </Col>
+          <Col>
+            <Switch>
+              <Route path='/signin'>
+                <SignIn />
+              </Route>
+              <Route path='/register'>
+                <Register />
+              </Route>
+              <Route path='/about'>
+                {/* <About /> */}
+              </Route>
+              <Route path='/instructor'>
+                <InstructorDash />
+              </Route>
+
+              <Route path='/'>
+                <Home />
+              </Route>
+            </Switch>
+          </Col>
         </Row>
       </Container>
     </UserContext.Provider>

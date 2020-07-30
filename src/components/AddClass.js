@@ -35,9 +35,8 @@ function AddClass(props) {
           .then(res => {
             setUserData({
                 ...userData,
-                createdclasses: [userData.createdclasses, res.data]
+                createdclasses: [...userData.createdclasses, res.data]
             })
-            console.log(res.data)
             setFormValues(initialFormValues)
           })
           .catch(err => {
@@ -89,6 +88,7 @@ function AddClass(props) {
 
       const submit = () => {
         const newClass = {
+            id: formValues.id,
             coursename: formValues.coursename.trim(),
             type: formValues.type.trim(),
             starttime: formValues.starttime.trim(),
@@ -107,7 +107,10 @@ function AddClass(props) {
           setDisabled(!valid)
         })
       }, [formValues])
-
+      useEffect(() => {
+        console.log('userData.createdclasses useEffect', userData.createdclasses);
+          
+      }, [userData.createdclasses])
       const onInputChange = event => {
         const { name, value } = event.target
         inputChange(name, value)
