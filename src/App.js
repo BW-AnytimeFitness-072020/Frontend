@@ -62,7 +62,7 @@ function App() {
                       <Link to='/'>Home</Link> </Col>
                   <Col>   <Link to='/signin'>Sign In</Link></Col>
                   <Col>   <Link to='/register'>Register</Link></Col>
-                  <Col>   <Link to='/classes'>Classes</Link></Col>
+                  <Col>   <Link to='/client'>Dashboard</Link></Col>
                   <Col>   <Link to='/about'>About Us</Link>
                   </Col>
       {/* <div className="App">
@@ -80,9 +80,6 @@ function App() {
           <Route exact path='/client'>
               <Client />
             </Route>
-          <Route path='/classes'>
-            <Classes />
-          </Route>
           <Route path='/about'>
             <About />
           </Route>
