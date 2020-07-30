@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import { Link, Switch, Route } from 'react-router-dom'
 import Home from './components/Home'
+import About from './components/About'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Classes from './components/Classes'
 import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
-import Header from './header.jsx';
+// import Header from './header.jsx';
 import InstructorDash from './InstructorDash'
 import { UserContext } from './contexts/userContext';
 import './App.css'
-
+ import Client from './ClientForm.jsx';
 
 
 
@@ -53,6 +54,7 @@ function App() {
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
       <Container fluid={true}>
+<<<<<<< HEAD
         <Row>
           <Col>
             Anytime Fitness
@@ -89,6 +91,49 @@ function App() {
               </Route>
             </Switch>
           </Col>
+=======
+      <Row>
+      <Col>
+                      Anytime Fitness
+                  </Col>
+                  <Col>
+                      <Link to='/'>Home</Link> </Col>
+                  <Col>   <Link to='/signin'>Sign In</Link></Col>
+                  <Col>   <Link to='/register'>Register</Link></Col>
+                  <Col>   <Link to='/classes'>Classes</Link></Col>
+                  <Col>   <Link to='/about'>About Us</Link>
+                  </Col>
+      {/* <div className="App">
+        <Header /></div> */}
+        </Row>
+        <Row>
+        <Col>
+        <Switch>
+          <Route path='/signin'>
+            <SignIn />
+          </Route>
+          <Route path='/register'>
+            <Register />
+          </Route>
+          <Route exact path='/client'>
+              <Client />
+            </Route>
+          <Route path='/classes'>
+            <Classes />
+          </Route>
+          <Route path='/about'>
+            <About />
+          </Route>
+          <Route path='/instructor'>
+            <InstructorDash />
+          </Route>
+          
+          <Route path='/'>
+            <Home />
+          </Route>
+        </Switch>
+        </Col>
+>>>>>>> master
         </Row>
       </Container>
     </UserContext.Provider>

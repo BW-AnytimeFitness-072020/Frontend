@@ -10,6 +10,19 @@ import { states, classCategories, mililaryTime, initialFormValues } from '../con
 import { UserContext } from '../contexts/userContext'
 
 
+<<<<<<< HEAD
+=======
+const initialFormValues = {
+    coursename: '',
+    type: '',
+    starttime: '',
+    duration: '',
+    intensitylevel: '',
+    location: '',
+    sizecapacity: '',
+  }
+  
+>>>>>>> master
   const initialFormErrors = {
     coursename: '',
     type: '',

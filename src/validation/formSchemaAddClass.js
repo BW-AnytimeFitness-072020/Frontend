@@ -5,11 +5,12 @@ import { states, classCategories, mililaryTime } from '../constants/index'
 const stateAbbreviations = Array.from(Object.keys(states))
 const classList = Array.from(Object.keys(classCategories))
 const timeArray = Array.from(Object.keys(mililaryTime))
-console.log(timeArray)
+// console.log(timeArray)
 
 const formSchemaAddClass = yup.object().shape({
   coursename: yup
     .string()
+    .max(250)
     .required('Course name is required'),
   type: yup
     .string()
@@ -20,7 +21,7 @@ const formSchemaAddClass = yup.object().shape({
     .oneOf(timeArray, 'Start time is required')
     .required('Start time is required'),
   duration: yup
-    .number().min(30).typeError('Duration must be a number')
+    .number().moreThan(29).typeError('Duration must be a number')
     .integer('Decimals are not allowed')
     .positive('Negative numbers are not allowed')
     .required('Class duration is required'),

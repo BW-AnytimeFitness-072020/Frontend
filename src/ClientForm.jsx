@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import ClassCard from './clientClassCard'
 import Axios from 'axios';
+import styled from 'styled-components';
+
+const Container = styled.div`
+display:flex;
+flex-direction: column;
+align-items: center;
+background-color:red;
+`
 
 const initialClass = {
+    id: 0,
     course: '',
     type: '',
     starttime: '', 
@@ -14,7 +23,7 @@ const initialClass = {
 
 export default function Client (user) {
 
-    const [classes, setClasses] = useState(initialClass)
+    const [classes, setClasses] = useState([initialClass])
 
     
     const onSubmit = e => {
@@ -34,16 +43,17 @@ export default function Client (user) {
         availableClasses(classLists)
     }
         const availableClasses = classLists => {
-                Axios.get('https://reqres.in/api/users', classLists)
+                Axios.get('https://lambda-anywhere-fitness.herokuapp.com/api/classes', classLists)
                 .then(response => {
-                    setClasses([response.data])
+                    console.log(response)
+                    setClasses([...classes, response.data])
                 })
                 .catch(err => {
                     console.log('error:', err)
                 })
             }
     return(
-    <div>
+    <Container>
         <h3> WELCOME {user.name}!</h3>
         <h5>Find A Class Today!</h5>
         <div className='search' onSubmit={onSubmit}>
@@ -56,16 +66,16 @@ export default function Client (user) {
             </label>
             <button className='searchbutton'>Search</button>
         </div>
-        {classes.map(classl => {
+        {classes.map(course => {
             return (
                 <ClassCard 
-                key={classl.id}
-                classes={classl}
+                key={course.id}
+                classes={course}
         />
             )
         })
 
         }
         
-    </div>
+    </Container>
 )}
