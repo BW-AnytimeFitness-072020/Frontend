@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 const FormSchemaSignIn = yup.object().shape({
-    name: yup.string().required(),
-    password: yup.string().required()
+    username: yup.string().required('Username is required').min(3),
+    password: yup.string().required('Password is required')
 })
 export default FormSchemaSignIn

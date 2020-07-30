@@ -23,10 +23,12 @@ const RegisterButton = styled.button`
 margin-left: 70%;
 `
 
-export default function ClassCard ({first_name, last_name, email}) {
+export default function ClassCard (props) {
+  const {first_name, last_name, email} = props.user
     // if (!course) {
     //     return <h3>We Are Finding Classes For You</h3>
     // }
+  console.log('card --> ', props);
    return (
     <Container>
         <h4>Available Classes</h4>

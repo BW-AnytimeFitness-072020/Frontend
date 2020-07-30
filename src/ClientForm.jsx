@@ -53,7 +53,7 @@ export default function Client (user) {
         Axios.get('https://reqres.in/api/users')
       .then(res => {
       console.log('Elizabeth', res.data.data);
-       setCourse([res.data.data])
+       setCourse(res.data.data)
       })
       .catch(err => {
       console.log(err);
@@ -102,9 +102,7 @@ export default function Client (user) {
                 <ClassCard 
                 key={each.id}
                 // course={course}
-                first_name={each.first_name}
-                last_name={each.last_name}
-                email={each.email}
+                user={each}
         />
             )
 

@@ -48,7 +48,6 @@ const initialErrors = {
     password: '',
 }
 
-const initialDisabled = true
 
 export default function SignIn () { 
     // const { setUserData } = useContext(UserContext)
@@ -58,31 +57,6 @@ export default function SignIn () {
     
     const history = useHistory()
 
-    const inputChange = (name, value) => {
-        // yup
-        //   .reach(FormSchemaSignIn, name)
-        //   .validate(value)
-        //   .then(valid => {
-        //     setErrors({
-        //       ...errors, [name]: '',
-        //     })
-        //   })
-        //   .catch(error => {
-        //     setErrors({
-        //       ...errors, [name]: error.errors[0],
-        //     })
-        //   })
-          setSignIn({...signIn, [name]: value})
-      }
-    
-      // const checkChange = (name, isChecked) => {
-      //   setSignIn({
-      //     ...signIn, users: {
-      //       ...signIn.users, [name]: isChecked,
-      //     }
-      //   })
-      // }
-    
       const submit = () => {
         axios.post('https://lambda-anywhere-fitness.herokuapp.com/api/auth/login', signIn)
         .then(response => {
@@ -105,11 +79,27 @@ export default function SignIn () {
     const onSubmit = e => {
         e.preventDefault()
         submit()
+  }
+  
+  const validateInput = (name, value) => {
+    yup.reach(FormSchemaSignIn, name)
+    .validate(value)
+      .then(valid=> {
+          setErrors({
+            ...errors,
+            [name]: ''
+          })
+      })
+      .catch(err => {
+        setErrors({
+          ...errors,
+          [name]: err.errors[0]
+        })
+      })
     }
 
     const onInputChange = e => {
-        const {name, value} = e.target
-        inputChange(name, value)
+        validateInput(e.target.name, e.target.value)
         setSignIn({...signIn, [e.target.name]: e.target.value})
     }
 
