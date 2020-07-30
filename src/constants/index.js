@@ -100,7 +100,6 @@ export const mililaryTime = {
     '24' : '24:00'
 }
 
-<<<<<<< HEAD
 export const initialFormValues = {
     coursename: '',
     type: '',
@@ -110,7 +109,6 @@ export const initialFormValues = {
     location: '',
     sizecapacity: '',
   }
-=======
 export const gitHubUsers = [
     'code-dependent',
     'mjschuette4',
@@ -118,4 +116,3 @@ export const gitHubUsers = [
     'ginxy13th',
     'kc0buk',
 ]
->>>>>>> master

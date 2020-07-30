@@ -54,44 +54,6 @@ function App() {
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
       <Container fluid={true}>
-<<<<<<< HEAD
-        <Row>
-          <Col>
-            Anytime Fitness
-          </Col>
-          <Col>
-            <Link to='/'>Home</Link> </Col>
-          <Col><Link to='/signin'>Sign In</Link></Col>
-          <Col><Link to='/register'>Register</Link></Col>
-          <Col><Link to='/instructor'>Dashboard</Link></Col>
-          <Col><Link to='/about'>About Us</Link>
-          </Col>
-
-          {/* <div className="App">
-        <Header /></div> */}
-        </Row>
-        <Row>
-          <Col>
-            <Switch>
-              <Route path='/signin'>
-                <SignIn />
-              </Route>
-              <Route path='/register'>
-                <Register />
-              </Route>
-              <Route path='/about'>
-                {/* <About /> */}
-              </Route>
-              <Route path='/instructor'>
-                <InstructorDash />
-              </Route>
-
-              <Route path='/'>
-                <Home />
-              </Route>
-            </Switch>
-          </Col>
-=======
       <Row>
       <Col>
                       Anytime Fitness
@@ -133,7 +95,6 @@ function App() {
           </Route>
         </Switch>
         </Col>
->>>>>>> master
         </Row>
       </Container>
     </UserContext.Provider>
