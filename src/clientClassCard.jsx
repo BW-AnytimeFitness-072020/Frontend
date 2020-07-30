@@ -23,22 +23,24 @@ const RegisterButton = styled.button`
 margin-left: 70%;
 `
 
-export default function ClassCard (course) {
-    if (!course) {
-        return <h3>We Are Finding Classes For You</h3>
-    }
+export default function ClassCard ({first_name, last_name, email}) {
+    // if (!course) {
+    //     return <h3>We Are Finding Classes For You</h3>
+    // }
    return (
     <Container>
         <h4>Available Classes</h4>
         <SmallContainer>
-            <RegisterButton>Register</RegisterButton>
-            <p>Course: {course.coursename} </p>
-            <p>Activity: {course.type}</p>
-            <p>Start Time: {course.starttime }</p> 
-            <p>Duration: {course.duration}</p>
-            <p>Intensity: {course.intensitylevel}</p>
-            <p>Location: {course.location}</p>
-            <p>Class Capacity: {course.sizecapacty}</p>   
+            {/* <RegisterButton>Register</RegisterButton> */}
+            {/* <p>Course: {course.title} </p>
+            <p>Start Time: {course.scheduleTime}</p>
+            <p>Address: {course.address}</p> 
+            <p>City: {course.city}</p>
+            <p>State: {course.state}</p>
+            <p>Zip Code: {course.zipCode}</p> */}
+            <p>First Name: {first_name}</p>
+            <p>Last Name: {last_name}</p>
+        <p>Email: {email}</p>
         </SmallContainer>
     </Container>
    ) 

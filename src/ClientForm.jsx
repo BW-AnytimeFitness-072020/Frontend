@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ClassCard from './clientClassCard'
 import Axios from 'axios';
 import styled from 'styled-components';
+import {axiosWithAuth} from './utils/axiosWithAuth'
 
 const Container = styled.div`
 display:flex;
@@ -10,53 +11,83 @@ align-items: center;
 background-color:red;
 `
 
-const initialClass = {
-    id: 0,
-    course: '',
-    type: '',
-    starttime: '', 
-    duration: '',
-    intensitylevel: '',
-    location: '',
-    sizecapacity: '',
+const initialCourse = {
+    // id: 0,
+    // title: '',
+    // scheduleTime: '',
+    // address: '', 
+    // city: '',
+    // state: '',
+    // zipcode: '',
+    email: '',
+    first_name:'',
+    last_name:''
 }
-
+// const initialCourse = []
 export default function Client (user) {
 
-    const [classes, setClasses] = useState([initialClass])
-
+    const [course, setCourse] = useState([initialCourse])
+    // const [coursevalues, setcoursevalues] = useState(initialCourseValues)
     
-    const onSubmit = e => {
-        e.preventDefault()
-        submit()
-    }
-    const submit = () => {
-        const classLists = {
-            course: classes.course.trim(),
-            type: classes.type.trim(),
-            starttime: classes.starttime.trim(), 
-            duration: classes.duration.trim(),
-            intensitylevel: classes.intensitylevel.trim(),
-            location: classes.location.trim(),
-            sizecapacity: classes.sizecapacity.trim(),
-        }
-        availableClasses(classLists)
-    }
-        const availableClasses = classLists => {
-                Axios.get('https://lambda-anywhere-fitness.herokuapp.com/api/classes', classLists)
-                .then(response => {
-                    console.log(response)
-                    setClasses([...classes, response.data])
-                })
-                .catch(err => {
-                    console.log('error:', err)
-                })
-            }
+//     const onSubmit = e => {
+//         e.preventDefault()
+//         submit()
+//     }
+//     const submit = () => {
+//         const classLists = {
+//             // title: classes.title.trim(),
+//             // scheduleTime: classes.scheduleTime.trim(), 
+//             // address: classes.address.trim(),
+//             // city: classes.city.trim(),
+//             // state: classes.state.trim(),
+//             // zipCode: classes.zipCode.trim(),
+//             email: classes.email.trim(),
+//             first_name: classes.first_name.trim(),
+//             last_name: classes.last_name.trim(),
+//         }
+//         availableClasses(classLists)
+//   }
+  
+  useEffect(() => {
+    // axiosWithAuth().post('https://lambda-anywhere-fitness.herokuapp.com/api/classes')
+        Axios.get('https://reqres.in/api/users')
+      .then(res => {
+      console.log('Elizabeth', res.data.data);
+       setCourse([res.data.data])
+      })
+      .catch(err => {
+      console.log(err);
+    })
+  }, [])
+
+//   const availableClasses = classLists => {
+//     axiosWithAuth().post('https://reqres.in/api/users', classLists)
+//         // 'https://lambda-anywhere-fitness.herokuapp.com/api/classes', classLists)
+//     .then(response => {
+//         console.log(response.data.data)
+//         // setClasses([...classes, response.data])
+//         setClasses([response.data.data])
+//     })
+//     .catch(err => {	
+//         console.log('error:', err)
+//     })
+// }
+
+// const Showclasses = course => {
+//     Axios.post('https://requres.in/api/users', course)
+//     .then(response => {
+//         setCourse(response.data.data, ...course)
+//         setcoursevalues(initialCourseValues)
+
+//     })
+// }
+  
+  console.log('give me classes', course);
     return(
     <Container>
         <h3> WELCOME {user.name}!</h3>
         <h5>Find A Class Today!</h5>
-        <div className='search' onSubmit={onSubmit}>
+        {/* <div className='search' onSubmit={onSubmit}>
             <label>
                 <input
                     name='search'
@@ -65,17 +96,19 @@ export default function Client (user) {
                 />
             </label>
             <button className='searchbutton'>Search</button>
-        </div>
-        {classes.map(course => {
+        </div> */}
+        {course.map((each) => {
             return (
                 <ClassCard 
-                key={course.id}
-                classes={course}
+                key={each.id}
+                // course={course}
+                first_name={each.first_name}
+                last_name={each.last_name}
+                email={each.email}
         />
             )
-        })
 
-        }
+        })}
         
     </Container>
 )}

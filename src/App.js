@@ -48,7 +48,7 @@ const initialUserData = {
 
 function App() {
   const [userData, setUserData] = useState(initialUserData)
-  console.log('userData', userData);
+  // console.log('userData', userData);
   {/*^This state will allow us to grab data stored in the client/instructor anywhere we want*/ }
 
   return (

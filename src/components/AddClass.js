@@ -6,12 +6,10 @@ import Dropdown from './Dropdown'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { states, classCategories, mililaryTime, initialFormValues } from '../constants/index'
+import { states, classCategories, mililaryTime } from '../constants/index'
 import { UserContext } from '../contexts/userContext'
 
 
-<<<<<<< HEAD
-=======
 const initialFormValues = {
     coursename: '',
     type: '',
@@ -22,7 +20,6 @@ const initialFormValues = {
     sizecapacity: '',
   }
   
->>>>>>> master
   const initialFormErrors = {
     coursename: '',
     type: '',
