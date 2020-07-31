@@ -2,12 +2,11 @@ import React, { useContext, useState } from 'react';
 import { UserContext } from './contexts/userContext';
 import InstructorClassCard from './InstructorClassCard';
 import AddClass from './components/AddClass';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 const initialFormValues = {
   coursename: '',
   type: '',
+  startdate: '',
   starttime: 0,
   duration: '',
   intensitylevel: '',
@@ -24,7 +23,7 @@ export default function InstructorDash (){
       <h2>Welcome {userData.username}</h2>
       <div>
         <h3>Your Classes</h3>
-          {userData.createdclasses.map(createdClass => <InstructorClassCard key={createdClass.id} {...{createdClass, setFormValues, setUpdatingBool}}/>)}
+          {userData.instructorcourses.map(createdClass => <InstructorClassCard key={createdClass.courseid} {...{createdClass, setFormValues, setUpdatingBool}}/>)}
       </div>
       <div>
         <h3>Create a New Class</h3>

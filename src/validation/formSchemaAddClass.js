@@ -1,13 +1,12 @@
-import React from 'react'
 import * as yup from 'yup'
 import { states, classCategories, mililaryTime } from '../constants/index'
 
-{/* The three variables below generate the list of state abbreviations for oneOf criteria in type, starttime and location in schema below from the objects supplied under constants imported above */}
+/* The three variables below generate the list of state abbreviations for oneOf criteria in type, starttime and location in schema below from the objects supplied under constants imported above */
 const stateAbbreviations = Array.from(Object.keys(states)) 
 const classList = Array.from(Object.keys(classCategories))
 const timeArray = Array.from(Object.keys(mililaryTime))
 
-{/* Sets minDate to yesterday to disallow entering dates in the past into input form */}
+/* Sets minDate to yesterday to disallow entering dates in the past into input form */
 const minDate = new Date()
 minDate.setDate(minDate.getDate() - 1)
 
@@ -16,13 +15,13 @@ const formSchemaAddClass = yup.object().shape({
   coursename: yup
     .string()
     .max(250)
-    .matches(/^[a-zA-Z0-9!$&#\'\?\(\)\-\"\: ]+$/, 'You have entered invalid characters')
+    .matches(/^[a-zA-Z0-9!$&#'?()\-": ]+$/, 'You have entered invalid characters')
     .required('Course name is required'),
   type: yup
     .string()
     .oneOf(classList, 'Class type is required')
     .required('Class type is required'),
-  date: yup
+  startdate: yup
     .date().typeError('Please enter a date in the format mm/dd/yyyy')
     .min(minDate, 'You can not enter a date in the past')
     .required('Class date is required'),
@@ -37,7 +36,7 @@ const formSchemaAddClass = yup.object().shape({
     .required('Class duration is required'),
     intensitylevel: yup
     .string()
-    .oneOf(['easy', 'medium', 'hard'], 'Intensity level is required')
+    .oneOf(['Easy', 'Medium', 'Hard'], 'Intensity level is required')
     .required('Intensity level is required'),
   location: yup
     .string()

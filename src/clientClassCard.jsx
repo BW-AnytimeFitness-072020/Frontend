@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { axiosWithAuth } from './utils/axiosWithAuth';
-import { UserContext } from './contexts/userContext'
 
 const Container = styled.div`
 background-color: grey;
@@ -25,11 +24,11 @@ const RegisterButton = styled.button`
 margin-left: 70%;
 `
 
-export default function ClassCard (course) {
-    const { userData } = useContext(UserContext)
+export default function ClassCard (props) {
+    const {course} = props
     const register = courseId => {
         axiosWithAuth()
-        .get(`/course/${courseId}`)
+        .get(`/users/user/addcourse/${courseId}`)
         .then(response => {
             console.log(response)
         })
@@ -40,12 +39,11 @@ export default function ClassCard (course) {
     }
    return (
     <Container>
-        <h4>Available Classes</h4>
         <SmallContainer>
-            <RegisterButton onClick={() => register(course.id) }>Register</RegisterButton>
-            <p>Course: {course.coursename} </p>
+        <h4>{course.coursename}</h4>
+            <RegisterButton onClick={() => register(course.courseid) }>Register</RegisterButton>
             <p>Activity: {course.type}</p>
-            <p>Start Time: {course.starttime }</p> 
+            <p>Start Time: {course.starttime}</p> 
             <p>Duration: {course.duration}</p>
             <p>Intensity: {course.intensitylevel}</p>
             <p>Location: {course.location}</p>

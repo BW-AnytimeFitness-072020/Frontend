@@ -1,3 +1,3 @@
-export default function defaultURL() {
-  return `whatever the api ends up being`
+export default function apiHook() {
+  return `https://dry-tundra-72055.herokuapp.com/`
 }

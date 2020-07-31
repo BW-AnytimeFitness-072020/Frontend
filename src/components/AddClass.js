@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
 import * as yup from 'yup'
 import formSchemaAddClass from '../validation/formSchemaAddClass'
 import Dropdown from './Dropdown'
@@ -7,12 +6,13 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { states, classCategories, mililaryTime, initialFormValues } from '../constants/index'
 import { UserContext } from '../contexts/userContext'
+import { axiosWithAuth } from '../utils/axiosWithAuth'
 
 
   const initialFormErrors = {
     coursename: '',
     type: '',
-    date: '',
+    startdate: '',
     starttime: '',
     duration: '',
     intensitylevel: '',
@@ -31,11 +31,14 @@ function AddClass(props) {
     const { userData, setUserData } = useContext(UserContext)
 
     const postNewClass = newClass => {
-        axios.post('https://reqres.in/api/users', newClass)
+        console.log(newClass)
+        axiosWithAuth()
+        .post('courses/course', newClass)
           .then(res => {
+            console.log('res', res);
             setUserData({
                 ...userData,
-                createdclasses: [...userData.createdclasses, res.data]
+                instructorcourses: [...userData.instructorcourses, newClass]
             })
             setFormValues(initialFormValues)
           })
@@ -44,17 +47,18 @@ function AddClass(props) {
           })
       }    
     const updateClass = updatedClass => {
-        axios.put(`https://reqres.in/api/users/${updatedClass.id}`, updatedClass)
+        axiosWithAuth()
+        .put(`courses/courses/${updatedClass.courseid}`, updatedClass)
         .then(res => {
+            console.log('res', res);
             setUserData({
                 ...userData,
-                createdclasses: userData.createdclasses.map(eachClass => {
+                instructorcourses: userData.instructorcourses.map(eachClass => {
                     return eachClass.id === updatedClass.id?
                     updatedClass:
                     eachClass;
                 })
             })
-            console.log(res.data)
             setFormValues(initialFormValues)
             setUpdatingBool(false)
         })
@@ -88,15 +92,15 @@ function AddClass(props) {
 
       const submit = () => {
         const newClass = {
-            id: formValues.id,
+            courseid: formValues.courseid,
             coursename: formValues.coursename.trim(),
             type: formValues.type.trim(),
-            date: formValues.date.trim(),
-            starttime: formValues.starttime.trim(),
-            duration: formValues.duration.trim(),
-            intensitylevel: formValues.intensitylevel.trim(),
-            location: formValues.location.trim(),
-            sizecapacity: formValues.sizecapacity.trim(),
+            startdate: formValues.startdate.trim(),
+            starttime: formValues.starttime,
+            duration: formValues.duration,
+            intensitylevel: formValues.intensitylevel,
+            location: formValues.location,
+            sizecapacity: formValues.sizecapacity,
         }
         updatingBool?
         updateClass(newClass):
@@ -108,10 +112,6 @@ function AddClass(props) {
           setDisabled(!valid)
         })
       }, [formValues])
-      useEffect(() => {
-        console.log('userData.createdclasses useEffect', userData.createdclasses);
-          
-      }, [userData.createdclasses])
       const onInputChange = event => {
         const { name, value } = event.target
         inputChange(name, value)
@@ -168,15 +168,15 @@ function AddClass(props) {
                     <label htmlFor='courseDateInput' className='sr-only'>Class Date</label>
                         <input 
                             id='courseDateInput'
-                            name='date'
+                            name='startdate'
                             type='date'
                             placeholder='Class Date'
                             className='form-control'
                             onChange={onInputChange}
-                            value={formValues.date}
+                            value={formValues.startdate || ''}
                         />
                         <div className=' alert-warning'>
-                    {formErrors.date}
+                    {formErrors.startdate}
                         </div>
                     </div>
                 </Col>
@@ -230,9 +230,9 @@ function AddClass(props) {
                         onChange={onInputChange}
                         >
                         <option value=''>Select</option>
-                        <option value='easy'>Easy</option>
-                        <option value='medium'>Medium</option>
-                        <option value='hard'>Hard</option>
+                        <option value='Easy'>Easy</option>
+                        <option value='Medium'>Medium</option>
+                        <option value='Hard'>Hard</option>
                         </select>
                     </label>
                     <div className=' alert-warning'>

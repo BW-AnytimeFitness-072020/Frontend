@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from './contexts/userContext';
 import styled from 'styled-components';
+import apiHook from './utils/apiHook'
+import { axiosWithAuth } from './utils/axiosWithAuth'
 
 const Container=styled.div`
 display:flex;
@@ -51,7 +53,7 @@ const initialErrors = {
 const initialDisabled = true
 
 export default function SignIn () { 
-    // const { setUserData } = useContext(UserContext)
+    const { setUserData } = useContext(UserContext)
     const [signIn, setSignIn] = useState(initialSignIn)
     const [disabled, setDisabled] = useState(initialDisabled)
     const [errors, setErrors] = useState(initialErrors)
@@ -82,19 +84,45 @@ export default function SignIn () {
           }
         })
       }
-    
+
       const submit = () => {
-        axios.post('https://reqres.in/api/users/signIn', signIn)
+        const userCredentials = {
+            username: signIn.username,
+            password: signIn.password
+        }
+        axios.post(`${apiHook()}login`, `grant_type=password&username=${userCredentials.username}&password=${userCredentials.password}`, {
+            headers: {
+                Authorization: `Basic ${btoa('lambda-client:lambda-secret')}`,
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
         .then(response => {
-          console.log(response)
-          localStorage.setItem("token", response.data.payload)
-          history.push("/dashboard")
+          localStorage.setItem("token", response.data.access_token)
+          getUserData()
         })
         .catch(error => {
           console.log(error)
         })
       }
-    
+    const getUserData = () => {
+        axiosWithAuth()
+        .get('/courses/getuserinfo')
+        .then(response => {
+            setUserData({
+                userid: response.data.userid,
+                username: response.data.username,
+                email: response.data.email,
+                courses: response.data.courses,
+                instructorcourses: response.data.instructorcourses,
+                role: response.data.roles[0].role.name
+            })
+            history.push(response.data.roles[0].role.name === "USER"?
+            "/client":
+            "/instructor"
+            )
+        })
+        .catch(error => console.log("error getting user data after sign in:", error))
+    }
       useEffect(() => {
         FormSchema.isValid(signIn).then(valid => {
           setDisabled(!valid)
@@ -126,7 +154,7 @@ export default function SignIn () {
                     <input
                     placeholder='UserName'
                     onChange={onInputChange}
-                    name='name'
+                    name='username'
                     type='text'
                     />
                 </label>
@@ -135,7 +163,7 @@ export default function SignIn () {
                     placeholder='Password'
                     onChange={onInputChange}
                     name='password'
-                    type='text'
+                    type='password'
                     />
                 </label>
                 <div className='checkboxes'>
@@ -146,7 +174,7 @@ export default function SignIn () {
                           type='checkbox'
                           name='client'
                           onChange={onCheckChange}
-                          checked={signIn.user.client === true }
+                          checked={signIn.user.client.value }
                           />
                         </Label>
                       <Label>Instructor
@@ -154,7 +182,7 @@ export default function SignIn () {
                           type='checkbox'
                           name='instructor'
                           onChange={onCheckChange}
-                          checked={signIn.user.instructor === true }
+                          checked={signIn.user.instructor.value }
                           />
                         </Label>
                     </Checkbox>
