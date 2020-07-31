@@ -4,7 +4,6 @@ import Home from './components/Home'
 import About from './components/About'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Classes from './components/Classes'
 import SignIn from './SignInPage.jsx';
 import Register from './RegisterPage.jsx';
 // import Header from './header.jsx';
@@ -15,71 +14,20 @@ import Client from './ClientForm.jsx';
 import PrivateRoute from './PrivateRoute';
 import { axiosWithAuth } from './utils/axiosWithAuth';
 
-
-
-// const initialUserData = {
-//   username: 'Jimmay',
-//   email: 'Jimmay@jimmay.com',
-//   password: 'Jimmay jr.',
-//   courses: [{
-//     id: 1,
-//     coursename: "Zoomba",
-//     type: "aerial",
-//     starttime: '12',
-//     duration: '50',
-//     intensitylevel: "medium",
-//     location: "FL",
-//     sizecapacity: '25'
-//   }],
-//   instructorcourses: [{
-//     id: 1,
-//     coursename: "Zoomba",
-//     type: "aerial",
-//     starttime: '12',
-//     duration: '50',
-//     intensitylevel: "medium",
-//     location: "FL",
-//     sizecapacity: '25'
-
-//   }],
-//   roles: [{
-//     role: {
-//       roleid: 2,
-//       name: "USER"
-//     }
-//   }]
-// }
 const initialUserData = {
   username: '',
   email: '',
   password: '',
   role: '',
   userid: '',
-  courses: [{
-    id: 1,
-    coursename: "",
-    type: "",
-    starttime: '',
-    duration: '',
-    intensitylevel: "",
-    location: "",
-    sizecapacity: ''
-  }],
-  instructorcourses: [{
-    id: 1,
-    coursename: "",
-    type: "",
-    starttime: '',
-    duration: '',
-    intensitylevel: "",
-    location: "",
-    sizecapacity: ''
-
-  }],
+  courses: [],
+  instructorcourses: [],
 }
 
 function App() {
   const [userData, setUserData] = useState(initialUserData)
+  console.log('userData', userData);
+
   /*^This state will allow us to grab data stored in the client/instructor anywhere we want*/
   const userType = () => {
     if(userData.role === "USER"){

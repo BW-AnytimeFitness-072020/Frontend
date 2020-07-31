@@ -2,12 +2,11 @@ import React, { useContext, useState } from 'react';
 import { UserContext } from './contexts/userContext';
 import InstructorClassCard from './InstructorClassCard';
 import AddClass from './components/AddClass';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 
 const initialFormValues = {
   coursename: '',
   type: '',
+  startDate: '',
   starttime: 0,
   duration: '',
   intensitylevel: '',

@@ -59,7 +59,7 @@ export const classCategories = {
     'aerial' : 'Aerial', 
     'barre' : 'Barre', 
     'bootcamp' : 'Bootcamp', 
-    'boxing-kickboxing' : 'Boxing \/         Kickboxing', 
+    'boxing-kickboxing' : 'Boxing          Kickboxing', 
     'circuit-training' : 'Circuit Training', 
     'crossfit' : 'Crossfit', 
     'cycling' : 'Cycling', 

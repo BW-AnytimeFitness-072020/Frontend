@@ -1,6 +1,6 @@
 import React from 'react'
 
-{/* Generates a dropdown box from an Object. Expects to data to be passed in via props (data). Object should be arranged as {'option value' : 'dropdown value'}. Function expects dropdown id, name, value and onChange to be passed in via props. */}
+/* Generates a dropdown box from an Object. Expects to data to be passed in via props (data). Object should be arranged as {'option value' : 'dropdown value'}. Function expects dropdown id, name, value and onChange to be passed in via props. */
 function Dropdown(props) {
     const {
         data,

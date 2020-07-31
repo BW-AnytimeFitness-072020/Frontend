@@ -3,7 +3,7 @@ import { axiosWithAuth } from "./utils/axiosWithAuth";
 import { UserContext } from "./contexts/userContext";
 
 export default function InstructorClassCard(props) {
-  const {  id, coursename, type, starttime, duration, intensitylevel, location, sizecapacity } = props.createdClass;
+  const {  id, coursename, startdate, type, starttime, duration, intensitylevel, location, sizecapacity } = props.createdClass;
   const { createdClass, setFormValues,setUpdatingBool } = props;
   const { setUserData, userData } = useContext(UserContext);
 
@@ -25,6 +25,7 @@ export default function InstructorClassCard(props) {
     <h4>Available Classes</h4>
     <p>Course: {coursename} </p>
     <p style={{textTransform: 'capitalize'}}>Activity: {type}</p>
+    <p>Date: {startdate}</p>
     <p>Start Time: {starttime }</p> 
     <p>Duration: {duration}</p>
     <p style={{textTransform: 'capitalize'}}>Intensity: {intensitylevel}</p>

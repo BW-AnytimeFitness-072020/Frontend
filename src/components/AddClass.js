@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
 import * as yup from 'yup'
 import formSchemaAddClass from '../validation/formSchemaAddClass'
 import Dropdown from './Dropdown'
@@ -13,7 +12,7 @@ import { axiosWithAuth } from '../utils/axiosWithAuth'
   const initialFormErrors = {
     coursename: '',
     type: '',
-    date: '',
+    startdate: '',
     starttime: '',
     duration: '',
     intensitylevel: '',
@@ -32,12 +31,14 @@ function AddClass(props) {
     const { userData, setUserData } = useContext(UserContext)
 
     const postNewClass = newClass => {
+        console.log(newClass)
         axiosWithAuth()
         .post('courses/course', newClass)
           .then(res => {
+            console.log('res', res);
             setUserData({
                 ...userData,
-                instructorcourses: [...userData.instructorcourses, res.data]
+                instructorcourses: [...userData.instructorcourses, newClass]
             })
             setFormValues(initialFormValues)
           })
@@ -93,7 +94,7 @@ function AddClass(props) {
             id: formValues.id,
             coursename: formValues.coursename.trim(),
             type: formValues.type.trim(),
-            date: formValues.date.trim(),
+            startdate: formValues.startdate.trim(),
             starttime: formValues.starttime.trim(),
             duration: formValues.duration.trim(),
             intensitylevel: formValues.intensitylevel.trim(),
@@ -166,15 +167,15 @@ function AddClass(props) {
                     <label htmlFor='courseDateInput' className='sr-only'>Class Date</label>
                         <input 
                             id='courseDateInput'
-                            name='date'
+                            name='startdate'
                             type='date'
                             placeholder='Class Date'
                             className='form-control'
                             onChange={onInputChange}
-                            value={formValues.date}
+                            value={formValues.startdate || ''}
                         />
                         <div className=' alert-warning'>
-                    {formErrors.date}
+                    {formErrors.startdate}
                         </div>
                     </div>
                 </Col>
