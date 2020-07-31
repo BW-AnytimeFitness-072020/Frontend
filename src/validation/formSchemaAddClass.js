@@ -36,7 +36,7 @@ const formSchemaAddClass = yup.object().shape({
     .required('Class duration is required'),
     intensitylevel: yup
     .string()
-    .oneOf(['easy', 'medium', 'hard'], 'Intensity level is required')
+    .oneOf(['Easy', 'Medium', 'Hard'], 'Intensity level is required')
     .required('Intensity level is required'),
   location: yup
     .string()

@@ -3,18 +3,19 @@ import { axiosWithAuth } from "./utils/axiosWithAuth";
 import { UserContext } from "./contexts/userContext";
 
 export default function InstructorClassCard(props) {
-  const {  id, coursename, startdate, type, starttime, duration, intensitylevel, location, sizecapacity } = props.createdClass;
-  const { createdClass, setFormValues,setUpdatingBool } = props;
+  const {  courseid, coursename, startdate, type, starttime, duration, intensitylevel, location, sizecapacity } = props.createdClass;
+  const { createdClass, setFormValues, setUpdatingBool } = props;
   const { setUserData, userData } = useContext(UserContext);
 
   const deleteClass = classId => {
+    console.log('classId', classId);
     axiosWithAuth()
-    .delete(`/courses/courses/${classId}`)
+    .delete(`/courses/course/${classId}`)
     .then(response => {
       setUserData({
         ...userData,
         instructorcourses: userData.instructorcourses.filter(eachClass => {
-          return eachClass.id !== classId
+          return eachClass.courseid !== classId
         })
       })
     })
@@ -32,10 +33,12 @@ export default function InstructorClassCard(props) {
     <p>Location: {location}</p>
     <p>Class Capacity: {sizecapacity}</p>
     <button onClick={() => {
-      setFormValues(...createdClass)
+      console.log('createdClass', createdClass);
+      
+      setFormValues(createdClass)
       setUpdatingBool(true)
     }}>Update</button>
-    <button onClick={() => deleteClass(id)}>Delete</button>
+    <button onClick={() => deleteClass(courseid)}>Delete</button>
   </div>
   );
 }
