@@ -4,10 +4,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import AboutCard from './AboutCard'
 import { gitHubUsers } from '../constants/index'
+import Error from './Error'
 
 
 function About() {
     const [userData, setUserData] = useState([])
+    const [error, setError] = useState('')
     
     {/* calls getAllData on the first render and sets the response into state via setUserData */}
     useEffect(() => {
@@ -34,6 +36,7 @@ function About() {
             
             .catch(err => {
                 console.log(`Something went wrong. The error was ${err}`)
+                setError(err)
             })
         }
     
@@ -42,7 +45,9 @@ function About() {
     return (
         <Row>
         <Col>
-            <AboutCard data={userData} />
+            {
+                !error ? <AboutCard data={userData} /> : <Error error={error} />
+            }
             </Col>
         </Row>
     )
