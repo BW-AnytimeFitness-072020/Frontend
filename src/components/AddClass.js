@@ -38,7 +38,7 @@ function AddClass(props) {
             console.log('res', res);
             setUserData({
                 ...userData,
-                instructorcourses: [...userData.instructorcourses, newClass]
+                instructorcourses: [...userData.instructorcourses, res.data]
             })
             setFormValues(initialFormValues)
           })
@@ -54,7 +54,7 @@ function AddClass(props) {
             setUserData({
                 ...userData,
                 instructorcourses: userData.instructorcourses.map(eachClass => {
-                    return eachClass.id === updatedClass.id?
+                    return eachClass.courseid === updatedClass.courseid?
                     updatedClass:
                     eachClass;
                 })
