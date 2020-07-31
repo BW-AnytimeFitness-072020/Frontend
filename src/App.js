@@ -56,6 +56,23 @@ function App() {
     }
   
   },[])
+
+  const dontDisplayWhenLogin = () => {
+    if(userData.role) {
+      return {display: 'none'}    
+    }else {
+      return {display: 'inline'}
+    }
+  }
+  const displayWhenLogin = () => {
+
+    if(userData.role) {
+      return {display: 'inline'}    
+    }else {
+      return {display: 'none'}
+    }
+  }
+  
   return (
     <UserContext.Provider value={{ userData, setUserData }}>
       
@@ -65,11 +82,10 @@ function App() {
                   </Col>
                   <Col>
                       <Link to='/'>Home</Link> </Col>
-                  <Col>   <Link to='/signin'>Sign In</Link></Col>
-                  <Col>   <Link to='/register'>Register</Link></Col>
-                  <Col>   <Link to={userType()}>Dashboard</Link></Col>
-                  <Col>   <Link to='/about'>About Us</Link>
-                  </Col>
+                  <Col>   <Link style={dontDisplayWhenLogin()} to='/signin'>Sign In</Link></Col>
+                  <Col>   <Link style={dontDisplayWhenLogin()} to='/register'>Register</Link></Col>
+                  <Col>   <Link style={displayWhenLogin()} to={userType()}>Dashboard</Link></Col>
+                  <Col>   <Link to='/about'>About Us</Link></Col>
       {/* <div className="App">
         <Header /></div> */}
         </Row>
